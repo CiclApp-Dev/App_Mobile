@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">CiclApp</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Match</string>
+    <string name="menu_slideshow">Repuestos</string>
+
+    <string name="home_second">Home Second</string>
+
+
+    <string-array name="nombres">
+        <item>Seleccione</item>
+        <item>Ignacio</item>
+        <item>Benjamin</item>
+        <item>Juan</item>
+        <item>Lucrecio</item>
+        <item>Lautaro</item>
+        <item>Facundo</item>
+        <item>Otro</item>
+    </string-array>
+
+    <string-array name="cantidades_memoria">
+        <item>Seleccione</item>
+        <item>0,5</item>
+        <item>1</item>
+        <item>2</item>
+        <item>4</item>
+        <item>8</item>
+        <item>16</item>
+        <item>32</item>
+        <item>64</item>
+        <item>128</item>
+        <item>256</item>
+        <item>512</item>
+    </string-array>
+
+    <string-array name="posibles_estados">
+        <item>Seleccione</item>
+        <item>Listo para vender</item>
+        <item>Reparar</item>
+        <item>Repuesto</item>
+        <item>Liberar</item>
+        <item>Vendido</item>
+    </string-array>
+
+    <string name="title_activity_historial">historial</string>
+    <string name="title_activity_tabs_activity">tabs_activity</string>
+
+    <string name="title_activity_chococrispi_activity">chococrispi_activity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+</resources>
