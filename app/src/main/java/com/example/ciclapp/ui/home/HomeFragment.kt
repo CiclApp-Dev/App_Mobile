@@ -83,6 +83,40 @@ class HomeFragment : Fragment() {
             (activity as MainActivity?)?.descheckear()
         }
 
+        root.botonVersiones.setOnClickListener{
+            if(root.textView5.text != "Sin cargar" && root.textView5.text != "Sin asignar") {
+
+
+                val id_enviar = root.textView8.text.toString()
+                (activity as MainActivity?)?.enviar_mensaje(",$id_enviar")
+
+                if(roto != "1"){
+                    cantidad = 0
+                    versiones = mutableListOf()
+
+                    for (item in retornos_hilo.split("&")) {
+                        cantidad = cantidad + 1
+                        versiones.add(item.split(","))
+                    }
+
+                    val myIntent = Intent(activity, Versiones::class.java)
+                    startActivity(myIntent)
+                }else{
+                    Toast.makeText(activity, "No hay conexion", Toast.LENGTH_LONG).show()
+                    roto = "0"
+                }
+
+
+            }else if(root.textView5.text == "Sin cargar"){
+                Toast.makeText(activity, "No se ha escaneado ningun telefono", Toast.LENGTH_LONG).show()
+            }else if(root.textView5.text == "Sin asignar"){
+                Toast.makeText(activity, "Aun no hay versiones del telefono seleccionado", Toast.LENGTH_LONG).show()
+            }
+
+
+        }
+
+
         return root
     }
 }

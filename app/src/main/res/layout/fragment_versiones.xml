@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.PlaceholderFragment">
+
+    <TextView
+        android:id="@+id/section_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintTop_creator="1"
+        tools:visibility="invisible" />
+
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginBottom="84dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Revisor: " />
+
+            <TextView
+                android:id="@+id/texto_revisor"
+                android:layout_width="115dp"
+                android:layout_height="wrap_content"
+                android:text="Sin completar" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Estetica: " />
+
+            <TextView
+                android:id="@+id/texto_estetica"
+                android:layout_width="115dp"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bateria: " />
+
+            <TextView
+                android:id="@+id/texto_bateria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sin completar" />
+
+            <TextView
+                android:id="@+id/textView29"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Porcentaje: " />
+
+            <TextView
+                android:id="@+id/texto_porcentaje"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sin completar" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="GB: " />
+
+            <TextView
+                android:id="@+id/texto_gb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sin completar" />
+
+            <TextView
+                android:id="@+id/asdwa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Color: " />
+
+            <TextView
+                android:id="@+id/texto_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sin completar" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textView33"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textView28"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textView30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TableLayout
+                android:id="@+id/tabla_checks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_span="4">
+
+                <TableRow
+                    android:id="@+id/checks_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <CheckBox
+                        android:id="@+id/check_wifi"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:text="WiFi"
+                        android:textSize="12sp" />
+
+                    <CheckBox
+                        android:id="@+id/check_bluetooth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:text="Bluetooth"
+                        android:textSize="12sp" />
+
+                    <CheckBox
+                        android:id="@+id/check_parlantet"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:text="Parlante trasero"
+                        android:textSize="12sp" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/checks_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <CheckBox
+                        android:id="@+id/check_auricular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:text="Auricular"
+                        android:textSize="12sp" />
+
+                    <CheckBox
+                        android:id="@+id/check_portasim"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:text="Porta Sim"
+                        android:textSize="12sp" />
+
+                    <CheckBox
+                        android:id="@+id/check_parlanted"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:text="Parlante delantero"
+                        android:textSize="12sp" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/checks_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <CheckBox
+                        android:id="@+id/check_microfono"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:text="Microfono"
+                        android:textSize="12sp" />
+
+                    <CheckBox
+                        android:id="@+id/check_liberar"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:text="Liberar"
+                        android:textSize="12sp" />
+
+                    <CheckBox
+                        android:id="@+id/check_sensor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:text="Sensor de proximidad"
+                        android:textSize="12sp" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/checks_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <CheckBox
+                        android:id="@+id/check_carcasa"
+                        android:layout_width="112dp"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:text="Carcasa"
+                        android:textSize="12sp" />
+
+                    <CheckBox
+                        android:id="@+id/check_pincarga"
+                        android:layout_width="112dp"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:text="Pin de carga"
+                        android:textSize="12sp" />
+
+                    <CheckBox
+                        android:id="@+id/check_camarad"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:text="Camara delantera"
+                        android:textSize="12sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/checks_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <CheckBox
+                        android:id="@+id/check_botones"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:text="Botones"
+                        android:textSize="12sp" />
+
+                    <CheckBox
+                        android:id="@+id/check_tactil"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:text="Tactil"
+                        android:textSize="12sp" />
+
+                    <CheckBox
+                        android:id="@+id/check_camarat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:text="Camara trasera"
+                        android:textSize="12sp" />
+                </TableRow>
+
+            </TableLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView34"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView35"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vidrio: " />
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radio_vidrioa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:text="OK" />
+
+                <RadioButton
+                    android:id="@+id/radio_vidriob"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:text="A" />
+
+                <RadioButton
+                    android:id="@+id/radio_vidrioc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:text="B" />
+
+                <RadioButton
+                    android:id="@+id/radio_vidriod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:text="No" />
+            </RadioGroup>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView36"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Modulo: " />
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radio_moduloa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:text="OK" />
+
+                <RadioButton
+                    android:id="@+id/radio_modulob"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:text="A" />
+
+                <RadioButton
+                    android:id="@+id/radio_moduloc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:text="B" />
+
+                <RadioButton
+                    android:id="@+id/radio_modulod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:text="C" />
+
+                <RadioButton
+                    android:id="@+id/radio_moduloe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:text="No" />
+            </RadioGroup>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView37"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Traslucido: " />
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radio_trasa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:text="A" />
+
+                <RadioButton
+                    android:id="@+id/radio_trasb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:text="B" />
+
+                <RadioButton
+                    android:id="@+id/radio_trasc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:text="C" />
+
+                <RadioButton
+                    android:id="@+id/radio_trasd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:text="D" />
+            </RadioGroup>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView38"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView39"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Estado: " />
+
+            <TextView
+                android:id="@+id/texto_estado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:text="Sin completar" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView40"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ubicacion: " />
+
+            <TextView
+                android:id="@+id/texto_ubicacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:text="Sin completar" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView41"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Otros: " />
+
+            <TextView
+                android:id="@+id/texto_otros"
+                android:layout_width="100dp"
+                android:layout_height="150dp"
+                android:layout_span="3"
+                android:text="Sin completar" />
+
+        </TableRow>
+
+    </TableLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
