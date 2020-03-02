@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.ciclapp.*
 import com.google.zxing.integration.android.IntentIntegrator
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment() {
@@ -50,7 +51,7 @@ class HomeFragment : Fragment() {
             scanner.initiateScan()
         }
 
-        root.BotonCargar.setOnClickListener{
+        root.cargar_telefono_.setOnClickListener{
             if(root.editText5.text.toString() == "Chococrispi" || root.editText5.text.toString() == "Flama") {
                 //val myIntent = Intent(activity, chococrispi_activity::class.java)
                 //this@MainActivity.startActivity(myIntent)
@@ -83,7 +84,7 @@ class HomeFragment : Fragment() {
             (activity as MainActivity?)?.descheckear()
         }
 
-        root.botonVersiones.setOnClickListener{
+        root.Boton_versiones.setOnClickListener{
             if(root.textView5.text != "Sin cargar" && root.textView5.text != "Sin asignar") {
 
 
@@ -116,7 +117,9 @@ class HomeFragment : Fragment() {
 
         }
 
-
+        root.borrar_telefono_boton.setOnClickListener {
+            (activity as MainActivity?)?.eliminar_telefono(root.textView8.text.toString())
+        }
         return root
     }
 }

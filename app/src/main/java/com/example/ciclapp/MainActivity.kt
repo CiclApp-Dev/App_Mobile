@@ -3,12 +3,11 @@ package com.example.ciclapp
 import `in`.galaxyofandroid.spinerdialog.SpinnerDialog
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.ClipData
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -71,6 +70,13 @@ class MainActivity : AppCompatActivity() {
         val textomail = headerView.findViewById<View>(R.id.textView) as TextView
         textousuario.text = nombre
         textomail.text = auth.currentUser?.email.toString()
+
+        if(nombre=="Benjamin"){
+            val imagenPerfil = headerView.findViewById<View>(R.id.imageView) as ImageView
+            imagenPerfil.setImageResource(R.drawable.july3p)
+            imagenPerfil.layoutParams.height = 256
+            imagenPerfil.layoutParams.width = 256
+        }
 
         // Aca se define lo que hace el boton logout
         logout_button.setOnClickListener{
@@ -339,8 +345,6 @@ class MainActivity : AppCompatActivity() {
                         Toast.makeText(this@MainActivity, "No hay conexion", Toast.LENGTH_LONG).show()
                     }
                 })
-
-
             }
         }).start()
     }
@@ -646,7 +650,56 @@ class MainActivity : AppCompatActivity() {
         check_camarat.setChecked(false)
     }
 
+    fun eliminar_telefono(imei: String){
+        val builder = AlertDialog.Builder(this@MainActivity)
+        builder.setTitle("Seguro que desea eliminar el telefono?")
+        builder.setMessage("Esta accion no se puede deshacer")
 
+        // Set a positive button and its click listener on alert dialog
+        builder.setPositiveButton("Si"){dialog, which ->
+            val mensaje_enviar = "delete,,,," + imei
+            Thread(Runnable {
+                try {
+                    val s = Socket("18.216.97.211", 42069)
+                    s.outputStream.write(mensaje_enviar.toByteArray())
+                    val mensajito = BufferedReader(InputStreamReader(s.getInputStream()))
+                    val ServerMessage = mensajito.readLine()
+                    s.close()
+                    if(ServerMessage.toString() == "ok"){
+                        runOnUiThread(object:Runnable{
+                            public override fun run() {
+                                Toast.makeText(this@MainActivity, "Telefono eliminado con exito", Toast.LENGTH_LONG).show()
+                                limpiar()
+                                textView8.text = "Sin cargar"
+                                textView5.text = "Sin cargar"
+                            }
+                        })
+                    }else {
+                        runOnUiThread(object:Runnable{
+                            public override fun run() {
+                                Toast.makeText(this@MainActivity, "No se pudo eliminar el telefono", Toast.LENGTH_LONG).show()
+                            }
+                        })
+                    }
+                }catch (e: Exception) {
+                    runOnUiThread(object:Runnable{
+                        public override fun run() {
+                            Toast.makeText(this@MainActivity, "No hay conexion", Toast.LENGTH_LONG).show()
+                        }
+                    })
+                }
+            }).start()
+        }
+
+        // Display a negative button on alert dialog
+        builder.setNegativeButton("No"){dialog,which ->
+            Toast.makeText(applicationContext,"Eliminacion cancelada",Toast.LENGTH_SHORT).show()
+        }
+
+
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+    }
 
 
 }
