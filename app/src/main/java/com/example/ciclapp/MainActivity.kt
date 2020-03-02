@@ -3,30 +3,31 @@ package com.example.ciclapp
 import `in`.galaxyofandroid.spinerdialog.SpinnerDialog
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.ClipData
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
-import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
-import com.google.android.material.navigation.NavigationView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
+import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.zxing.integration.android.IntentIntegrator
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
-import kotlinx.android.synthetic.main.nav_header_main.*
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.Socket
 
-var telefono_actual = arrayOf<String>()
 var versiones = mutableListOf<List<String>>()
 var cantidad = 1
 var retornos_hilo = ""
@@ -41,13 +42,11 @@ val lg = arrayListOf("K50S", "G8X ThinQ", "K40S", "K20", "K30", "K12 Prime", "St
 val huawei = arrayListOf("Y6s", "Nova 5T Pro", "P smart Pro 2019", "nova 6 SE", "Nova 6", "Enjoy 10S", "Honor V30", "Honor V30 Pro", "Y9s", "Honor 20 Youth", "Enjoy 10", "nova 5z", "Nova 5T", "Mate 30", "Mate 30 Pro", "Honor Play 3", "Honor Play 3e", "Enjoy 10 Plus", "Honor 20S", "Honor 9x", "Honor 9x Pro", "Mate 30 Lite", "nova 5i Pro", "Honor Play 8", "P20 Lite 2019", "nova 5", "nova 5 Pro", "nova 5i", "Maimang 8", "Honor 20 Pro", "Honor 20", "Mate 20X 5G", "Y9 Prime 2019", "P Smart Z", "Honor 20 Lite", "Y7 Pro 2019", "Honor 8s", "Y5 2019", "Honor 20i", "Y6 Prime 2019", "P30 Lite", "P30 Pro", "P30", "Enjoy 9e", "Enjoy 9s", "Honor 10i", "nova 4e", "P smart+ 2019", "Y6 2019", "Mate X", "Y6 Pro 2019", "Y7 Prime 2019", "Honor Play 8A", "P Smart 2019", "Honor View 20", "Y Max", "nova 4", "Enjoy 9", "Honor 10 Lite", "Honor Magic 2", "Mate 20 Pro", "Mate 20 RS Porsche Design", "Mate 20", "Mate 20X", "Enjoy Max", "Enjoy 9 Plus", "Honor 8C", "Y9 (2019)", "Maimang 7", "Honor 8x", "Honor 8x Max", "Enjoy 8e Lite", "Mate 20 Lite", "P smart+", "Honor Note 10", "Honor 9N", "nova 3i", "Nova 3", "Honor 9i", "Honor Play", "Honor Play 7", "Y5 2018", "Y3 2018", "Honor 7S", "Y6 2018", "Honor 10", "Mate RS", "Enjoy 8e", "Honor 7A", "Y7 Prime 2018", "Enjoy 8", "Enjoy 8 Plus", "P20 Lite", "Y9 (2018)", "P20 Pro", "P20", "nova 3e", "Y7 Pro 2018", "nova 2 Lite", "Honor 7C", "P Smart", "Nova 2s", "Enjoy 7s", "Honor 9 Lite", "Honor V10", "Honor 6C Pro", "Honor Holly 4", "Honor 7x", "Mate 10", "Mate 10 Pro", "Mate 10 Lite", "Honor Holly 4 Plus", "Maimang 6", "nova 2i", "Honor V9 Play", "Honor 6 Play", "P9 Lite mini", "Y6 2017", "Enjoy 7", "Honor Holly 3+", "Y3 2017", "Honor 9", "Y7 Prime", "Nova 2", "Nova 2 Plus", "Nova Young", "Y6 Pro 2017", "Honor 6A", "Y7", "Nova Youth", "Nova Smart", "Enjoy 7 Plus", "Honor Bee 2", "Honor 9i India", "Honor 6C", "P10 Lite", "Honor 8 Pro", "P10", "P10 Plus", "Honor V9", "Nova Lite", "GR5 2017", "Honor 8 Lite", "P8 Lite 2017", "P9 Lite 2017", "P8 Lite Smart", "Honor Magic", "Honor 8 Smart", "Enjoy 6s", "Mate 9 Pro", "Mate 9", "Mate 9 Lite", "Enjoy 6", "Honor 6X", "Honor Holly 3", "Nova", "Nova Plus", "Y6II Compact", "Honor 5", "Honor Note 8", "G9 Plus", "Maimang 5", "Honor 8", "Y6 II", "Y3 II", "GT3", "Honor 5A", "G9 Lite", "Ascend Y5 II", "Honor V8", "Honor 5C", "Honor 4C Pro", "P9", "P9 Plus", "GR5", "P9 Lite", "Honor Holly 2 Plus", "Y6 Pro", "Maimang 4", "Enjoy 5S", "G629", "Ascend G7 Plus", "Mate 8", "Honor Shot X", "Enjoy 5", "Y6", "Honor 5X", "Nexus 6P", "GX1s", "GX8", "Mate S", "Honor 7i", "GR3", "Y6+", "Honor 4A Play", "Ascend Y5", "Honor 7", "Honor Bee", "P8 Max", "G Play mini", "Y625", "P8", "P8 Lite", "Y3", "Y635", "MediaPad Honor X2", "Honor 4C Play", "Ascend Y540", "Honor 6 Plus", "G620", "Honor 4X Play", "Honor 4X", "Honor Holly", "Ascend G535", "Ascend Mate7", "Ascend Y550", "Ascend G620S", "Ascend G7", "Honor 4 Play", "C199", "Honor 3C Play Edition", "Honor 6", "Honor 3C 4G", "Ascend P7", "Honor 3X Pro", "Ascend P7 mini", "Ascend G630", "Ascend Y330", "Ascend Y600", "MediaPad Honor X1", "Ascend G6", "Ascend G730", "Ascend Y530", "Ascend G6 4G", "B199", "Ascend P6 S", "Ascend Mate 2 4G", "Honor 3C", "Honor 3X", "Ascend G740", "Ascend G700", "Honor 3", "Ascend G525", "G610s", "Ascend P6", "Ascend Y300", "Ascend P2", "Ascend P1 LTE", "Ascend G615", "Ascend Mate", "Ascend G510", "Ascend D2", "Honor 2")
 val alcatel = arrayListOf("3", "1C", "3V", "3X", "3C", "Pixi 4 Plus Power", "A7 Xl", "A3 Plus 3G", "Idol 5", "A7", "U5 HD", "Idol 5S", "A3 XL", "A3", "A5 LED", "Flash (2017)", "U5", "Pixi 4 (5)", "Idol 4S", "Pop 4+", "Pop 4 (6)", "Flash Plus 2", "OneTouch Flash 2", "Pixi 4 (4)", "Pixi 4 (6)", "Idol 4", "Pop 4", "Pop 4S", "OneTouch Pop Up", "OneTouch Pop 3 (5.5)", "OneTouch Go Play", "OneTouch Pop 3 (5)", "OneTouch Pop Star 3G", "OneTouch Pop Star 4G", "Shine Lite", "OneTouch Pixi First", "OneTouch Idol 3 (4.7)", "Pixi 3", "OneTouch Idol 2 Mini", "OneTouch Idol 2", "OneTouch Fire E", "OneTouch Pop C5", "Onetouch Hero 2", "OneTouch Pop 2 (5)", "OneTouch Pop 2 (4)", "OneTouch Pop 2 (4.5)", "OneTouch Pop D5", "OneTouch Idol 3", "OneTouch Pop C2", "OneTouch Pop C1", "OneTouch Pop S7", "OneTouch Pop S3", "OneTouch Idol X+", "OneTouch Pop C9", "OneTouch Pop C3", "OneTouch Idol Alpha", "OneTouch Pop C7", "OneTouch Star", "OneTouch Idol Ultra")
 val otros = arrayListOf("Otros")
-var usuario = ""
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,6 +64,22 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        // Aca definimos los nombres de usuario e email
+        val auth = FirebaseAuth.getInstance()
+        val headerView: View = navView.getHeaderView(0)
+        val textousuario = headerView.findViewById<View>(R.id.texto_usuario) as TextView
+        val textomail = headerView.findViewById<View>(R.id.textView) as TextView
+        textousuario.text = nombre
+        textomail.text = auth.currentUser?.email.toString()
+
+        // Aca se define lo que hace el boton logout
+        logout_button.setOnClickListener{
+            Toast.makeText(this, "Sesion finalizada", Toast.LENGTH_LONG).show()
+            auth.signOut()
+            finish()
+            val intent = Intent(this@MainActivity, Pantalla_logueo::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -108,15 +123,11 @@ class MainActivity : AppCompatActivity() {
                                 }
                             })
                         }catch (e: Exception) {
-
-
                             runOnUiThread(object:Runnable{
                                 public override fun run() {
                                     Toast.makeText(this@MainActivity, "No hay conexion", Toast.LENGTH_LONG).show()
                                 }
                             })
-
-
                         }
                     }).start()
                 }
@@ -295,7 +306,7 @@ class MainActivity : AppCompatActivity() {
                     traslucido = "D"
                 }
 
-                val listaDeLaMuerte = textView8.text.toString() + "," + marcaSeleccionada.text.toString() + "," + modeloSeleccionado.text.toString()+ "," + "00/00" + "," + spinner.getSelectedItem().toString() + "," + spinner_gb.getSelectedItem().toString() + "," + editText2.text.toString() + "," + estetica + "," + carcasa + "," + camarat + "," + camarad + "," + pin  + "," + auriculares + "," + parlantef + "," + parlantet + "," + sensorprox + "," + bateria + "," + bateriaporcentaje + "," + wifi + "," + bluetooth + "," + vidrio + "," + modulo + "," + traslucido + "," + editText5.text.toString() + "," + spinner3.getSelectedItem().toString() + "," + editText6.text.toString() + "," + liberar + "," + portasim + "," + micro + "," + botones + "," + tactil
+                val listaDeLaMuerte = textView8.text.toString() + "," + marcaSeleccionada.text.toString() + "," + modeloSeleccionado.text.toString()+ "," + "00/00" + "," + nombre.toString() + "," + spinner_gb.getSelectedItem().toString() + "," + editText2.text.toString() + "," + estetica + "," + carcasa + "," + camarat + "," + camarad + "," + pin  + "," + auriculares + "," + parlantef + "," + parlantet + "," + sensorprox + "," + bateria + "," + bateriaporcentaje + "," + wifi + "," + bluetooth + "," + vidrio + "," + modulo + "," + traslucido + "," + editText5.text.toString() + "," + spinner3.getSelectedItem().toString() + "," + editText6.text.toString() + "," + liberar + "," + portasim + "," + micro + "," + botones + "," + tactil
 
                 val s = Socket("18.216.97.211", 42069)
                 s.outputStream.write(listaDeLaMuerte.toByteArray())
@@ -346,7 +357,7 @@ class MainActivity : AppCompatActivity() {
         editText5.setText(listarda[24])
         editText6.setText(listarda[26])
 
-        if(listarda[6]=="Seleccione"){
+        if(listarda[6]=="Seleccione" || listarda[6]=="GB"){
             spinner_gb.setSelection(0)
         }else if(listarda[6]=="0,5"){
             spinner_gb.setSelection(1)
@@ -370,6 +381,8 @@ class MainActivity : AppCompatActivity() {
             spinner_gb.setSelection(10)
         }else if(listarda[6]=="512"){
             spinner_gb.setSelection(11)
+        }else {
+            spinner_gb.setSelection(0)
         }
 
         if(listarda[25]=="Seleccione"){
@@ -546,9 +559,7 @@ class MainActivity : AppCompatActivity() {
         if (editText6.text.toString() == ""){
             mensaje_a_enviar += "- Ubicacion\n"
         }
-        if (spinner.getSelectedItem().toString() == "Seleccione"){
-            mensaje_a_enviar += "- Revisor\n"
-        }
+
 
         mensaje_a_enviar += "\n Desea continuar de todas formas?"
 

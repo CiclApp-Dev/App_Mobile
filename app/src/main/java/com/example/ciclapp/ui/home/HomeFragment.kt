@@ -62,7 +62,7 @@ class HomeFragment : Fragment() {
                 if("," in a || "," in b || "," in c || "," in d){
                     Toast.makeText(activity, "Los textos no pueden contener coma", Toast.LENGTH_LONG).show()
                 }else{
-                    if (root.editText2.text.toString() == "" || root.spinner3.getSelectedItem().toString() == "Seleccione" || root.editText6.text.toString() == "" || root.spinner.getSelectedItem().toString() == "Seleccione" || root.marcaSeleccionada.text.toString() == "Seleccione" || root.modeloSeleccionado.text.toString() == "Seleccione"){
+                    if (root.editText2.text.toString() == "" || root.spinner3.getSelectedItem().toString() == "Seleccione" || root.editText6.text.toString() == ""  || root.marcaSeleccionada.text.toString() == "Seleccione" || root.modeloSeleccionado.text.toString() == "Seleccione"){
                         (activity as MainActivity?)?.mostrar_mensaje_error()
                     }else{
                         (activity as MainActivity?)?.enviar()

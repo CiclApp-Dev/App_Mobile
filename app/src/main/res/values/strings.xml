@@ -11,8 +11,11 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Match</string>
     <string name="menu_slideshow">Repuestos</string>
+    <string name="logout_text"><u>Cerrar sesion</u></string>
 
     <string name="home_second">Home Second</string>
+    <string name="nombre_logo"><b>Cicl</b>App</string>
+
 
 
     <string-array name="nombres">
@@ -27,7 +30,7 @@
     </string-array>
 
     <string-array name="cantidades_memoria">
-        <item>Seleccione</item>
+        <item>GB</item>
         <item>0,5</item>
         <item>1</item>
         <item>2</item>

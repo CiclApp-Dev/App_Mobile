@@ -6,10 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:freezesText="true"
+        android:text="Sin cargar"
+        android:visibility="gone"
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="7dp" />
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_horizontal|center_vertical">
+        android:gravity="center_horizontal|top">
 
         <TableRow
             android:layout_width="match_parent"
@@ -22,724 +32,667 @@
                 android:layout_height="wrap_content"
                 android:scaleType="centerInside">
 
-                <LinearLayout
+            </ScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TableLayout
+                    android:id="@+id/marca_modelo"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent">
 
-                    <TableLayout
-                        android:id="@+id/id_imei"
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" >
+
+                        <TextView
+                            android:id="@+id/textView9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="TextView"
+                            android:visibility="invisible"
+                            tools:visibility="invisible" />
+
+                        <TextView
+                            android:id="@+id/textView20"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="TextView"
+                            android:visibility="invisible" />
+
+                        <TextView
+                            android:id="@+id/textView22"
+                            android:layout_width="130dp"
+                            android:layout_height="wrap_content"
+                            android:text="TextView"
+                            android:visibility="invisible" />
+                    </TableRow>
+
+                    <TableRow
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <TableRow
+                        <TextView
+                            android:id="@+id/textView7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="IMEI: " />
+
+                        <TextView
+                            android:id="@+id/textView8"
+                            android:layout_width="180dp"
+                            android:layout_height="wrap_content"
+                            android:freezesText="true"
+                            android:text="Sin cargar"
+                            android:textIsSelectable="true" />
+
+                        <Button
+                            android:id="@+id/BotonEscanear"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="wrap_content"
+                            android:text="Escanear"
+                            android:textSize="12sp" />
 
-                            <TextView
-                                android:id="@+id/textView7"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="IMEI: " />
+                    </TableRow>
 
-                            <TextView
-                                android:textIsSelectable="true"
-                                android:id="@+id/textView8"
-                                android:layout_width="180dp"
-                                android:layout_height="wrap_content"
-                                android:freezesText="true"
-                                android:text="Sin cargar" />
-
-                            <TextView
-                                android:id="@+id/textView2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Id: " />
-
-                            <TextView
-                                android:freezesText="true"
-                                android:id="@+id/textView5"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Sin cargar" />
-
-                        </TableRow>
-
-                    </TableLayout>
-
-                    <TableLayout
-                        android:id="@+id/marca_modelo"
+                    <TableRow
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical">
 
-                        <TableRow
+                        <TextView
+                            android:id="@+id/textView10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Marca: " />
+
+                        <TextView
+                            android:id="@+id/marcaSeleccionada"
+                            android:layout_width="160dp"
+                            android:layout_height="wrap_content"
+                            android:freezesText="true"
+                            android:text="Seleccione" />
+
+                        <Button
+                            android:id="@+id/botoncito"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" >
+                            android:layout_height="wrap_content"
+                            android:text="Seleccionar"
+                            android:textSize="12sp" />
+                    </TableRow>
 
-                            <TextView
-                                android:id="@+id/textView22"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
-
-                            <TextView
-                                android:id="@+id/textView25"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
-
-                            <TextView
-                                android:id="@+id/textView27"
-                                android:layout_width="160dp"
-                                android:layout_height="wrap_content" />
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical">
-
-                            <TextView
-                                android:id="@+id/textView10"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Marca: " />
-
-                            <TextView
-                                android:freezesText="true"
-                                android:id="@+id/marcaSeleccionada"
-                                android:layout_width="160dp"
-                                android:layout_height="wrap_content"
-                                android:text="Seleccione" />
-
-                            <Button
-                                android:id="@+id/botoncito"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Seleccionar"
-                                android:textSize="12sp" />
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical">
-
-                            <TextView
-                                android:id="@+id/textView6"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Modelo: " />
-
-                            <TextView
-                                android:id="@+id/modeloSeleccionado"
-                                android:freezesText="true"
-                                android:layout_width="160dp"
-                                android:layout_height="wrap_content"
-                                android:text="Seleccione" />
-
-                            <Button
-                                android:id="@+id/botonModelo"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Seleccionar"
-                                android:textSize="12sp" />
-                        </TableRow>
-
-                    </TableLayout>
-
-                    <TextView
-                        android:id="@+id/textView20"
+                    <TableRow
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical">
 
-                    <TableLayout
-                        android:id="@+id/revisor_memoria"
+                        <TextView
+                            android:id="@+id/textView6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Modelo: " />
+
+                        <TextView
+                            android:id="@+id/modeloSeleccionado"
+                            android:layout_width="160dp"
+                            android:layout_height="wrap_content"
+                            android:freezesText="true"
+                            android:text="Seleccione" />
+
+                        <Button
+                            android:id="@+id/botonModelo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Seleccionar"
+                            android:textSize="12sp" />
+                    </TableRow>
+
+                </TableLayout>
+
+                <TableLayout
+                    android:id="@+id/estetica_bateria"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TableRow
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical">
 
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/textView13"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Estetica: " />
 
-                            <TableLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
+                        <RadioGroup
+                            android:id="@+id/radioGroup2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
 
-                                <TableRow
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent" />
-
-                                <TableRow
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent" />
-
-                                <TableRow
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent" />
-
-                                <TableRow
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent" />
-                            </TableLayout>
-
-                            <TextView
-                                android:id="@+id/textView9"
+                            <RadioButton
+                                android:id="@+id/radioButton7"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Revisor: " />
+                                android:text="A" />
 
-                            <Spinner
-                                android:id="@+id/spinner"
-                                android:layout_width="155dp"
-                                android:layout_height="wrap_content"
-                                android:entries="@array/nombres" />
-
-                            <TextView
-                                android:id="@+id/textView12"
+                            <RadioButton
+                                android:id="@+id/radioButton8"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="GB: " />
+                                android:text="B" />
 
-                            <Spinner
-                                android:id="@+id/spinner_gb"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:entries="@array/cantidades_memoria" />
-                        </TableRow>
-
-                    </TableLayout>
-
-                    <TableLayout
-                        android:id="@+id/estetica_bateria"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical">
-
-                            <TextView
-                                android:id="@+id/textView13"
+                            <RadioButton
+                                android:id="@+id/radioButton9"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Estetica: " />
+                                android:layout_weight="1"
+                                android:text="C" />
 
-                            <RadioGroup
-                                android:id="@+id/radioGroup2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                        </RadioGroup>
 
-                                <RadioButton
-                                    android:id="@+id/radioButton7"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="A" />
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="25dp"
+                            android:layout_height="wrap_content" />
 
-                                <RadioButton
-                                    android:id="@+id/radioButton8"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="B" />
+                        <EditText
+                            android:id="@+id/editText2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:hint="Color"
+                            android:layout_span="2"
+                            android:inputType="textPersonName|textCapSentences"
+                            android:textSize="14sp" />
 
-                                <RadioButton
-                                    android:id="@+id/radioButton9"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="C" />
+                    </TableRow>
 
-                            </RadioGroup>
-
-                            <TextView
-                                android:id="@+id/textView4"
-                                android:layout_width="25dp"
-                                android:layout_height="wrap_content" />
-
-                            <EditText
-                                android:id="@+id/editText2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:ems="10"
-                                android:hint="Color"
-                                android:inputType="textPersonName|textCapSentences"
-                                android:textSize="14sp" />
-
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center_vertical">
-
-                            <TextView
-                                android:id="@+id/textView15"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Bateria: " />
-
-                            <RadioGroup
-                                android:id="@+id/radioGroup6"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <RadioButton
-                                    android:id="@+id/radioButton4"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Ok" />
-
-                                <RadioButton
-                                    android:id="@+id/radioButton5"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="No" />
-                            </RadioGroup>
-
-                            <TextView
-                                android:id="@+id/textView11"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
-
-                            <EditText
-                                android:id="@+id/editText4"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:ems="10"
-                                android:hint="Porcentaje"
-                                android:inputType="number"
-                                android:textSize="14sp" />
-
-                        </TableRow>
-
-                    </TableLayout>
-
-                    <TextView
-                        android:id="@+id/textView23"
+                    <TableRow
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical">
 
-                    <TableLayout
-                        android:id="@+id/tabla_checks"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/textView15"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Bateria: " />
 
-                        <TableRow
-                            android:id="@+id/checks_1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                        <RadioGroup
+                            android:id="@+id/radioGroup6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
 
-
-                            <CheckBox
-                                android:id="@+id/check_wifi"
-                                android:layout_width="100dp"
-                                android:layout_height="wrap_content"
-                                android:text="WiFi"
-                                android:textSize="12sp" />
-
-                            <CheckBox
-                                android:id="@+id/check_bluetooth"
+                            <RadioButton
+                                android:id="@+id/radioButton4"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Bluetooth"
-                                android:textSize="12sp" />
+                                android:text="Ok" />
 
-                            <CheckBox
-                                android:id="@+id/check_parlantet"
+                            <RadioButton
+                                android:id="@+id/radioButton5"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Parlante trasero"
-                                android:textSize="12sp" />
-                        </TableRow>
-
-                        <TableRow
-                            android:id="@+id/checks_2"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <CheckBox
-                                android:id="@+id/check_auricular"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Auricular"
-                                android:textSize="12sp" />
-
-                            <CheckBox
-                                android:id="@+id/check_portasim"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Porta Sim"
-                                android:textSize="12sp" />
-
-                            <CheckBox
-                                android:id="@+id/check_parlanted"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Parlante delantero"
-                                android:textSize="12sp" />
-                        </TableRow>
-
-                        <TableRow
-                            android:id="@+id/checks_3"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <CheckBox
-                                android:id="@+id/check_microfono"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Microfono"
-                                android:textSize="12sp" />
-
-                            <CheckBox
-                                android:id="@+id/check_liberar"
-                                android:layout_width="100dp"
-                                android:layout_height="wrap_content"
-                                android:text="Liberar"
-                                android:textSize="12sp" />
-
-                            <CheckBox
-                                android:id="@+id/check_sensor"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Sensor de proximidad"
-                                android:textSize="12sp" />
-                        </TableRow>
-
-                        <TableRow
-                            android:id="@+id/checks_5"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <CheckBox
-                                android:id="@+id/check_carcasa"
-                                android:layout_width="112dp"
-                                android:layout_height="wrap_content"
-                                android:text="Carcasa"
-                                android:textSize="12sp" />
-
-                            <CheckBox
-                                android:id="@+id/check_pincarga"
-                                android:layout_width="112dp"
-                                android:layout_height="wrap_content"
-                                android:text="Pin de carga"
-                                android:textSize="12sp" />
-
-                            <CheckBox
-                                android:id="@+id/check_camarad"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Camara delantera"
-                                android:textSize="12sp" />
-
-                        </TableRow>
-
-                        <TableRow
-                            android:id="@+id/checks_4"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <CheckBox
-                                android:id="@+id/check_botones"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Botones"
-                                android:textSize="12sp" />
-
-                            <CheckBox
-                                android:id="@+id/check_tactil"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Tactil"
-                                android:textSize="12sp" />
-
-                            <CheckBox
-                                android:id="@+id/check_camarat"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Camara trasera"
-                                android:textSize="12sp" />
-                        </TableRow>
-
-                    </TableLayout>
-
-                    <TextView
-                        android:id="@+id/textView26"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <TableLayout
-                        android:id="@+id/tabla_selectores"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <TableRow
-                            android:id="@+id/selector_vidrio"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical">
-
-                            <TextView
-                                android:id="@+id/textView"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Vidrio: " />
-
-                            <RadioGroup
-                                android:id="@+id/radioGroup3"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-
-                                android:orientation="horizontal">
-
-                                <RadioButton
-                                    android:id="@+id/radioButton10"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="OK" />
-
-                                <RadioButton
-                                    android:id="@+id/radioButton11"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="A" />
-
-                                <RadioButton
-                                    android:id="@+id/radioButton12"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="B" />
-
-                                <RadioButton
-                                    android:id="@+id/radioButton13"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="No" />
-                            </RadioGroup>
-                        </TableRow>
-
-                        <TableRow
-                            android:id="@+id/selector_modulo"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical">
-
-                            <TextView
-                                android:id="@+id/textView3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Modulo: " />
-
-                            <RadioGroup
-                                android:id="@+id/radioGroup4"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-
-                                android:orientation="horizontal">
-
-                                <RadioButton
-                                    android:id="@+id/radioButton14"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="OK" />
-
-                                <RadioButton
-                                    android:id="@+id/radioButton15"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="A" />
-
-                                <RadioButton
-                                    android:id="@+id/radioButton16"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="B" />
-
-                                <RadioButton
-                                    android:id="@+id/radioButton17"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="C" />
-
-                                <RadioButton
-                                    android:id="@+id/radioButton18"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="No" />
-                            </RadioGroup>
-                        </TableRow>
-
-                        <TableRow
-                            android:id="@+id/selector_traslucido"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical">
-
-                            <TextView
-                                android:id="@+id/textView16"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Traslucido: " />
-
-                            <RadioGroup
-                                android:id="@+id/radioGroup5"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-
-                                android:orientation="horizontal">
-
-                                <RadioButton
-                                    android:id="@+id/radioButton19"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="A" />
-
-                                <RadioButton
-                                    android:id="@+id/radioButton20"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="B" />
-
-                                <RadioButton
-                                    android:id="@+id/radioButton21"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="C" />
-
-                                <RadioButton
-                                    android:id="@+id/radioButton23"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="D" />
-                            </RadioGroup>
-                        </TableRow>
-
-                    </TableLayout>
-
-                    <TableLayout
-                        android:id="@+id/tabla_llenar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <TableRow
-                            android:id="@+id/escrito_estado"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical">
-
-                            <TextView
-                                android:id="@+id/textView31"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Estado: " />
-
-                            <Spinner
-                                android:id="@+id/spinner3"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:entries="@array/posibles_estados" />
-                        </TableRow>
-
-                        <TableRow
-                            android:id="@+id/escrito_lugar"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical">
-
-                            <TextView
-                                android:id="@+id/textView18"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Ubicacion: " />
-
-                            <EditText
-                                android:id="@+id/editText6"
-                                android:layout_width="250dp"
-                                android:layout_height="wrap_content"
-
-                                android:ems="10"
-                                android:hint="Ubicacion"
-                                android:inputType="textPersonName|textCapSentences"
-                                android:textSize="14sp" />
-                        </TableRow>
-
-                        <TableRow
-                            android:id="@+id/escrito_otros"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical">
-
-                            <TextView
-                                android:id="@+id/textView17"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-
-                                android:text="Otros: " />
-
-                            <EditText
-                                android:id="@+id/editText5"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-
-                                android:ems="10"
-                                android:hint="Otros"
-                                android:inputType="textPersonName|textCapSentences"
-                                android:textSize="14sp" />
-
-                        </TableRow>
-                    </TableLayout>
-
-                    <TableLayout
-                        android:id="@+id/botones"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <Button
-                                android:id="@+id/BotonEscanear"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Escanear"
-                                android:textSize="13.5sp" />
-
-                            <Button
-                                android:id="@+id/BotonCargar"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Cargar"
-                                android:textSize="13.5sp" />
-
-                            <Button
-                                android:id="@+id/botonVersiones"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Versiones"
-                                android:textSize="13.5sp" />
-
-                            <Button
-                                android:id="@+id/CrazyButton"
-                                android:layout_width="50dp"
-                                android:layout_height="wrap_content"
-                                android:clickable="false"
-                                android:text="OK"
-                                android:textSize="13.5sp" />
-
-                            <Button
-                                android:id="@+id/CrazyButtonNO"
-                                android:layout_width="50dp"
                                 android:layout_height="wrap_content"
                                 android:text="No" />
-                        </TableRow>
+                        </RadioGroup>
 
-                    </TableLayout>
+                        <EditText
+                            android:id="@+id/editText4"
+                            android:layout_width="35dp"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:hint="  %"
+                            android:inputType="number"
+                            android:textSize="14sp" />
 
-                </LinearLayout>
-            </ScrollView>
+                        <TextView
+                            android:id="@+id/textView12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Memoria: " />
+
+                        <Spinner
+                            android:id="@+id/spinner_gb"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:entries="@array/cantidades_memoria" />
+
+                    </TableRow>
+
+                </TableLayout>
+
+                <TextView
+                    android:id="@+id/textView23"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TableLayout
+                    android:id="@+id/tabla_checks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TableRow
+                        android:id="@+id/checks_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                        <CheckBox
+                            android:id="@+id/check_wifi"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="WiFi"
+                            android:textSize="12sp" />
+
+                        <CheckBox
+                            android:id="@+id/check_bluetooth"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Bluetooth"
+                            android:textSize="12sp" />
+
+                        <CheckBox
+                            android:id="@+id/check_parlantet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Parlante trasero"
+                            android:textSize="12sp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/checks_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <CheckBox
+                            android:id="@+id/check_auricular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Auricular"
+                            android:textSize="12sp" />
+
+                        <CheckBox
+                            android:id="@+id/check_portasim"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Porta Sim"
+                            android:textSize="12sp" />
+
+                        <CheckBox
+                            android:id="@+id/check_parlanted"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Parlante delantero"
+                            android:textSize="12sp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/checks_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <CheckBox
+                            android:id="@+id/check_microfono"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Microfono"
+                            android:textSize="12sp" />
+
+                        <CheckBox
+                            android:id="@+id/check_liberar"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="Liberar"
+                            android:textSize="12sp" />
+
+                        <CheckBox
+                            android:id="@+id/check_sensor"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sensor de proximidad"
+                            android:textSize="12sp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/checks_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <CheckBox
+                            android:id="@+id/check_carcasa"
+                            android:layout_width="112dp"
+                            android:layout_height="wrap_content"
+                            android:text="Carcasa"
+                            android:textSize="12sp" />
+
+                        <CheckBox
+                            android:id="@+id/check_pincarga"
+                            android:layout_width="112dp"
+                            android:layout_height="wrap_content"
+                            android:text="Pin de carga"
+                            android:textSize="12sp" />
+
+                        <CheckBox
+                            android:id="@+id/check_camarad"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Camara delantera"
+                            android:textSize="12sp" />
+
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/checks_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <CheckBox
+                            android:id="@+id/check_botones"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Botones"
+                            android:textSize="12sp" />
+
+                        <CheckBox
+                            android:id="@+id/check_tactil"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tactil"
+                            android:textSize="12sp" />
+
+                        <CheckBox
+                            android:id="@+id/check_camarat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Camara trasera"
+                            android:textSize="12sp" />
+                    </TableRow>
+
+                </TableLayout>
+
+                <TextView
+                    android:id="@+id/textView26"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TableLayout
+                    android:id="@+id/tabla_selectores"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TableRow
+                        android:id="@+id/selector_vidrio"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/textView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Vidrio: " />
+
+                        <RadioGroup
+                            android:id="@+id/radioGroup3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/radioButton10"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="OK" />
+
+                            <RadioButton
+                                android:id="@+id/radioButton11"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="A" />
+
+                            <RadioButton
+                                android:id="@+id/radioButton12"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="B" />
+
+                            <RadioButton
+                                android:id="@+id/radioButton13"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No" />
+                        </RadioGroup>
+
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/selector_modulo"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/textView3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Modulo: " />
+
+                        <RadioGroup
+                            android:id="@+id/radioGroup4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/radioButton14"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="OK" />
+
+                            <RadioButton
+                                android:id="@+id/radioButton15"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="A" />
+
+                            <RadioButton
+                                android:id="@+id/radioButton16"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="B" />
+
+                            <RadioButton
+                                android:id="@+id/radioButton17"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="C" />
+
+                            <RadioButton
+                                android:id="@+id/radioButton18"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No" />
+                        </RadioGroup>
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/selector_traslucido"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/textView16"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Traslu: " />
+
+                        <RadioGroup
+                            android:id="@+id/radioGroup5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/radioButton19"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="A" />
+
+                            <RadioButton
+                                android:id="@+id/radioButton20"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="B" />
+
+                            <RadioButton
+                                android:id="@+id/radioButton21"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="C" />
+
+                            <RadioButton
+                                android:id="@+id/radioButton23"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="D" />
+                        </RadioGroup>
+                    </TableRow>
+
+                </TableLayout>
+
+                <TableLayout
+                    android:id="@+id/tabla_llenar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TableRow
+                        android:id="@+id/escrito_estado"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/textView31"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Estado: " />
+
+                        <Spinner
+                            android:id="@+id/spinner3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:entries="@array/posibles_estados" />
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/escrito_lugar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/textView18"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ubicacion: " />
+
+                        <EditText
+                            android:id="@+id/editText6"
+                            android:layout_width="250dp"
+                            android:layout_height="wrap_content"
+
+                            android:ems="10"
+                            android:hint="Ubicacion"
+                            android:inputType="textPersonName|textCapSentences"
+                            android:textSize="14sp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/escrito_otros"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/textView17"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:text="Otros: " />
+
+                        <EditText
+                            android:id="@+id/editText5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:ems="10"
+                            android:hint="Otros"
+                            android:inputType="textPersonName|textCapSentences"
+                            android:textSize="14sp" />
+
+                    </TableRow>
+                </TableLayout>
+
+                <TextView
+                    android:id="@+id/textView25"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:visibility="invisible" />
+
+                <TableLayout
+                    android:id="@+id/botones"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <Button
+                            android:id="@+id/BotonCargar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cargar"
+                            android:textSize="13.5sp" />
+
+                        <Button
+                            android:id="@+id/botonVersiones"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Versiones"
+                            android:textSize="13.5sp" />
+
+                        <Button
+                            android:id="@+id/CrazyButton"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:text="OK"
+                            android:textSize="13.5sp" />
+
+                        <Button
+                            android:id="@+id/CrazyButtonNO"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:text="No" />
+                    </TableRow>
+
+                </TableLayout>
+
+            </LinearLayout>
         </TableRow>
 
     </TableLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
