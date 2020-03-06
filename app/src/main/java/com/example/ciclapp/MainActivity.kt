@@ -701,5 +701,25 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
     }
 
-
+    fun mostrar_datos(imei: String){
+        val builder = AlertDialog.Builder(this@MainActivity)
+        builder.setTitle("Match correcto: " + imei)
+        builder.setMessage("ID: 22\n" +
+                "IMEI: 358521070212736\n" +
+                "MARCA: Samsung\n" +
+                "MODELO: Galaxy S7 Edge\n" +
+                "\n" +
+                "El telefono es reparable. Las partes a reparar son:\n" +
+                "\nCamara trasera \nBuscar en el inventario\n" +
+                "\nCamara delantera \nIMEI: 353773087345091\n" +
+                "\nPin de carga \nIMEI: 353773087345091\n" +
+                "\nJack de auriculares \nBuscar en el inventario\n" +
+                "\nParlante delantero \nIMEI: 353773087345091\n" +
+                "\nParlante trasero \nBuscar en el inventario\n" +
+                "\nSensor de proximidad \nIMEI: 353773087345091\n" +
+                "\nBateria \nIMEI: 353773087345091")
+        builder.setPositiveButton("Ok"){dialog,which -> }
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+    }
 }
