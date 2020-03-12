@@ -62,4 +62,16 @@
     <string name="title_activity_versiones">Versiones</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+
+    <string-array name="marcas_telefonos">
+        <item>Seleccione</item>
+        <item>Samsung</item>
+        <item>Apple</item>
+        <item>Motorola</item>
+        <item>Sony</item>
+        <item>LG</item>
+        <item>Huawei</item>
+        <item>Alcatel</item>
+        <item>Otros</item>
+    </string-array>
 </resources>

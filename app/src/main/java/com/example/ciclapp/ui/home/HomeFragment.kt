@@ -20,6 +20,12 @@ class HomeFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
+        if(recargar == 1){
+            activity?.finish()
+            val intent = Intent(activity, MainActivity::class.java)
+            startActivity(intent)
+            recargar = 0
+        }
         val root = inflater.inflate(R.layout.fragment_home, container, false)
 
         root.botonModelo.setOnClickListener{
