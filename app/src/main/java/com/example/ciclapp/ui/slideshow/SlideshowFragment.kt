@@ -33,9 +33,6 @@ class SlideshowFragment : Fragment() {
     ): View? {
         recargar = 1
 
-
-
-        (activity as MainActivity?)?.mostrar_toast("Flaco no está terminada esta parte todavía. Salí de aca.")
         val root = inflater.inflate(R.layout.fragment_slideshow, container, false)
 
         val ejemplo_lista = ArrayList<Item_de_inventario>()

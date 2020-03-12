@@ -8,17 +8,18 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.replace
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.ciclapp.ui.gallery.GalleryFragment
+import com.example.ciclapp.ui.home.HomeFragment
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.zxing.integration.android.IntentIntegrator
@@ -658,54 +659,74 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun eliminar_telefono(imei: String){
-        val builder = AlertDialog.Builder(this@MainActivity)
-        builder.setTitle("Seguro que desea eliminar el telefono?")
-        builder.setMessage("Esta accion no se puede deshacer")
+        val constructor = AlertDialog.Builder(this@MainActivity)
+        constructor.setTitle("Eliminar telefono")
+        constructor.setMessage("Desea antes agregar los repuestos al inventario?")
 
-        // Set a positive button and its click listener on alert dialog
-        builder.setPositiveButton("Si"){dialog, which ->
-            val mensaje_enviar = "delete,,,," + imei
-            Thread(Runnable {
-                try {
-                    val s = Socket("18.216.97.211", 42069)
-                    s.outputStream.write(mensaje_enviar.toByteArray())
-                    val mensajito = BufferedReader(InputStreamReader(s.getInputStream()))
-                    val ServerMessage = mensajito.readLine()
-                    s.close()
-                    if(ServerMessage.toString() == "ok"){
+
+        constructor.setPositiveButton("Si") { dialog, which ->
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.nav_host_fragment, GalleryFragment())
+            transaction.commit()
+
+
+        }
+
+
+        constructor.setNegativeButton("No") { dialog, which ->
+            val builder = AlertDialog.Builder(this@MainActivity)
+            builder.setTitle("Seguro que desea eliminar el telefono?")
+            builder.setMessage("Esta accion no se puede deshacer")
+
+
+
+            // Set a positive button and its click listener on alert dialog
+            builder.setPositiveButton("Si"){dialog, which ->
+                val mensaje_enviar = "delete,,,," + imei
+                Thread(Runnable {
+                    try {
+                        val s = Socket("18.216.97.211", 42069)
+                        s.outputStream.write(mensaje_enviar.toByteArray())
+                        val mensajito = BufferedReader(InputStreamReader(s.getInputStream()))
+                        val ServerMessage = mensajito.readLine()
+                        s.close()
+                        if(ServerMessage.toString() == "ok"){
+                            runOnUiThread(object:Runnable{
+                                public override fun run() {
+                                    Toast.makeText(this@MainActivity, "Telefono eliminado con exito", Toast.LENGTH_LONG).show()
+                                    limpiar()
+                                    textView8.text = "Sin cargar"
+                                    textView5.text = "Sin cargar"
+                                }
+                            })
+                        }else {
+                            runOnUiThread(object:Runnable{
+                                public override fun run() {
+                                    Toast.makeText(this@MainActivity, "No se pudo eliminar el telefono", Toast.LENGTH_LONG).show()
+                                }
+                            })
+                        }
+                    }catch (e: Exception) {
                         runOnUiThread(object:Runnable{
                             public override fun run() {
-                                Toast.makeText(this@MainActivity, "Telefono eliminado con exito", Toast.LENGTH_LONG).show()
-                                limpiar()
-                                textView8.text = "Sin cargar"
-                                textView5.text = "Sin cargar"
-                            }
-                        })
-                    }else {
-                        runOnUiThread(object:Runnable{
-                            public override fun run() {
-                                Toast.makeText(this@MainActivity, "No se pudo eliminar el telefono", Toast.LENGTH_LONG).show()
+                                Toast.makeText(this@MainActivity, "No hay conexion", Toast.LENGTH_LONG).show()
                             }
                         })
                     }
-                }catch (e: Exception) {
-                    runOnUiThread(object:Runnable{
-                        public override fun run() {
-                            Toast.makeText(this@MainActivity, "No hay conexion", Toast.LENGTH_LONG).show()
-                        }
-                    })
-                }
-            }).start()
+                }).start()
+            }
+
+            // Display a negative button on alert dialog
+            builder.setNegativeButton("No"){dialog,which ->
+                Toast.makeText(applicationContext,"Eliminacion cancelada",Toast.LENGTH_SHORT).show()
+            }
+
+
+            val dialog: AlertDialog = builder.create()
+            dialog.show()
         }
+        constructor.show()
 
-        // Display a negative button on alert dialog
-        builder.setNegativeButton("No"){dialog,which ->
-            Toast.makeText(applicationContext,"Eliminacion cancelada",Toast.LENGTH_SHORT).show()
-        }
-
-
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
     }
 
     fun mostrar_datos(imei: String){
