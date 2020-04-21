@@ -198,7 +198,7 @@ class MainActivity : AppCompatActivity() {
         check_camarat.setChecked(false)
 
         spinner_gb.setSelection(0)
-        spinner3.setSelection(0)
+
 
 
     }
@@ -315,7 +315,28 @@ class MainActivity : AppCompatActivity() {
                     traslucido = "D"
                 }
 
-                val listaDeLaMuerte = textView8.text.toString() + "," + marcaSeleccionada.text.toString() + "," + modeloSeleccionado.text.toString()+ "," + "00/00" + "," + nombre.toString() + "," + spinner_gb.getSelectedItem().toString() + "," + editText2.text.toString() + "," + estetica + "," + carcasa + "," + camarat + "," + camarad + "," + pin  + "," + auriculares + "," + parlantef + "," + parlantet + "," + sensorprox + "," + bateria + "," + bateriaporcentaje + "," + wifi + "," + bluetooth + "," + vidrio + "," + modulo + "," + traslucido + "," + editText5.text.toString() + "," + spinner3.getSelectedItem().toString() + "," + editText6.text.toString() + "," + liberar + "," + portasim + "," + micro + "," + botones + "," + tactil
+
+                var tienealgoroto = false
+                if(radioButton5.isChecked() || !check_wifi.isChecked() || !check_bluetooth.isChecked() || !check_parlantet.isChecked() || !check_auricular.isChecked() || !check_portasim.isChecked() || !check_parlanted.isChecked() || !check_microfono.isChecked() || !check_liberar.isChecked() || !check_sensor.isChecked() || !check_carcasa.isChecked() || !check_pincarga.isChecked() || !check_camarad.isChecked() || !check_camarat.isChecked() || !check_botones.isChecked() || !check_tactil.isChecked()){
+                    tienealgoroto = true
+                }
+
+                var estado = "Listo para Vender"
+                if (!switch1.isChecked()){
+                    estado = "Repuesto"
+                }else if(radioButton18.isChecked()){
+                    estado = "Cambiar Modulo"
+                }else if(radioButton13.isChecked()){
+                    estado = "Cambiar Vidrio"
+                }else if(tienealgoroto == true){
+                    estado = "Reparar"
+                }else if(!check_liberar.isChecked()){
+                    estado = "Liberar"
+                }
+
+
+
+                val listaDeLaMuerte = textView8.text.toString() + "," + marcaSeleccionada.text.toString() + "," + modeloSeleccionado.text.toString()+ "," + "00/00" + "," + nombre.toString() + "," + spinner_gb.getSelectedItem().toString() + "," + editText2.text.toString() + "," + estetica + "," + carcasa + "," + camarat + "," + camarad + "," + pin  + "," + auriculares + "," + parlantef + "," + parlantet + "," + sensorprox + "," + bateria + "," + bateriaporcentaje + "," + wifi + "," + bluetooth + "," + vidrio + "," + modulo + "," + traslucido + "," + editText5.text.toString() + "," + estado + "," + editText6.text.toString() + "," + liberar + "," + portasim + "," + micro + "," + botones + "," + tactil
 
                 val s = Socket("18.216.97.211", 42069)
                 s.outputStream.write(listaDeLaMuerte.toByteArray())
@@ -392,20 +413,11 @@ class MainActivity : AppCompatActivity() {
             spinner_gb.setSelection(0)
         }
 
-        if(listarda[25]=="Seleccione"){
-            spinner3.setSelection(0)
-        }else if(listarda[25]=="Listo para vender"){
-            spinner3.setSelection(1)
-        }else if(listarda[25]=="Reparar"){
-            spinner3.setSelection(2)
-        }else if(listarda[25]=="Repuesto"){
-            spinner3.setSelection(3)
-        }else if(listarda[25]=="Liberar"){
-            spinner3.setSelection(4)
-        }else if(listarda[25]=="Vendido"){
-            spinner3.setSelection(5)
+        if(listarda[25] == "Repuesto"){
+            switch1.setChecked(true)
+        }else{
+            switch1.setChecked(false)
         }
-
 
 
         if(listarda[8] == "A" || listarda[8] == "0"){
@@ -564,9 +576,6 @@ class MainActivity : AppCompatActivity() {
         }
         if (modeloSeleccionado.text.toString() == "Seleccione"){
             mensaje_a_enviar += "- Modelo\n"
-        }
-        if (spinner3.getSelectedItem().toString() == "Seleccione"){
-            mensaje_a_enviar += "- Estado\n"
         }
         if (editText6.text.toString() == ""){
             mensaje_a_enviar += "- Ubicacion\n"

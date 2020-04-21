@@ -603,25 +603,6 @@
                         android:layout_height="wrap_content">
 
                         <TableRow
-                            android:id="@+id/escrito_estado"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical">
-
-                            <TextView
-                                android:id="@+id/textView31"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Estado: " />
-
-                            <Spinner
-                                android:id="@+id/spinner3"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:entries="@array/posibles_estados" />
-                        </TableRow>
-
-                        <TableRow
                             android:id="@+id/escrito_lugar"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -668,6 +649,21 @@
                                 android:textSize="14sp" />
 
                         </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" >
+
+                            <Switch
+                                android:id="@+id/switch1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_span="2"
+                                android:text="Se puede probar?"
+                                android:theme="@style/botoncito"
+                                tools:checked="true" />
+                        </TableRow>
+
                     </TableLayout>
 
                     <TextView

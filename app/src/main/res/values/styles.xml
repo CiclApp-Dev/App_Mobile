@@ -7,6 +7,13 @@
         <item name="colorAccent">#D1D1D1</item>
     </style>
 
+
+    <style name="botoncito" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimaryDark">#7CD67E</item>
+        <item name="colorAccent">#7CD67E</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
