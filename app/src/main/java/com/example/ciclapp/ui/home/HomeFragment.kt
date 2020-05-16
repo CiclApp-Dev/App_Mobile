@@ -61,7 +61,7 @@ class HomeFragment : Fragment() {
             if(root.editText5.text.toString() == "Chococrispi" || root.editText5.text.toString() == "Flama") {
                 //val myIntent = Intent(activity, chococrispi_activity::class.java)
                 //this@MainActivity.startActivity(myIntent)
-            }else if(root.textView8.text != "Sin cargar"){
+            }else if(root.textView8.text.toString() != "Sin cargar"){
                 val a = root.editText2.text.toString()
                 val b = root.editText4.text.toString()
                 val c = root.editText5.text.toString()
@@ -78,8 +78,14 @@ class HomeFragment : Fragment() {
             }else {
                 Toast.makeText(activity, "No se ha escaneado ningun telefono", Toast.LENGTH_LONG).show()
             }
+        }
 
-
+         root.Boton_vender.setOnClickListener{
+            if(root.textView8.text.toString() != "Sin cargar"){
+                (activity as MainActivity?)?.vender(root.textView8.text.toString())
+            }else{
+                Toast.makeText(activity, "No se ha escaneado ningun IMEI.", Toast.LENGTH_LONG).show()
+            }
         }
 
         root.CrazyButton.setOnClickListener {

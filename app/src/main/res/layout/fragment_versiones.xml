@@ -504,7 +504,7 @@
                 android:id="@+id/textView40"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ubicacion: " />
+                android:text="Operador: " />
 
             <TextView
                 android:id="@+id/texto_ubicacion"

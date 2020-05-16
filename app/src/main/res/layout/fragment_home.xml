@@ -612,7 +612,7 @@
                                 android:id="@+id/textView18"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Ubicacion: " />
+                                android:text="Operador: " />
 
                             <EditText
                                 android:id="@+id/editText6"
@@ -620,7 +620,7 @@
                                 android:layout_height="wrap_content"
 
                                 android:ems="10"
-                                android:hint="Ubicacion"
+                                android:hint="Operador"
                                 android:inputType="textPersonName|textCapSentences"
                                 android:textSize="14sp" />
                         </TableRow>
@@ -711,9 +711,18 @@
             android:id="@+id/Boton_versiones"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:fab_colorNormal="#547C9B"
             app:fab_label="Versiones"
             android:src="?attr/actionModeCopyDrawable"
              />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/Boton_vender"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_money_4"
+            app:fab_colorNormal="#549B71"
+            app:fab_label="Vendido" />
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/borrar_telefono_boton"
@@ -721,6 +730,11 @@
             android:layout_height="match_parent"
             android:src="@drawable/trash"
             app:fab_label="Eliminar" />
+
+
+
+
+
 
 
 
