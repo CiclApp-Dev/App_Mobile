@@ -22,8 +22,13 @@ import com.example.ciclapp.ui.gallery.GalleryFragment
 import com.example.ciclapp.ui.home.HomeFragment
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.zxing.integration.android.IntentIntegrator
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_pantalla_logueo.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -72,6 +77,7 @@ class MainActivity : AppCompatActivity() {
         val textomail = headerView.findViewById<View>(R.id.textView) as TextView
         textousuario.text = nombre
         textomail.text = auth.currentUser?.email.toString()
+
 
         if(nombre=="Benjamin"){
             val imagenPerfil = headerView.findViewById<View>(R.id.imageView) as ImageView
@@ -365,9 +371,24 @@ class MainActivity : AppCompatActivity() {
                         estado = "Liberar"
                     }
 
+                    if(nombre == ""){
+                        val auth = FirebaseAuth.getInstance()
+                        val progress = ProgressDialog.show(this@MainActivity, "Recuperando nombre de usuario", "Espere un momento", true)
 
+                        val database = FirebaseDatabase.getInstance().reference.child("Users").child(auth.currentUser?.uid.toString())
+                        val valueEventListener: ValueEventListener = object : ValueEventListener {
+                            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                nombre = dataSnapshot.children.elementAt(1).value.toString()
+                                progress.dismiss()
+                            }
+                            override fun onCancelled(databaseError: DatabaseError) {
+                                progress.dismiss()
+                            }
+                        }
+                        database.addListenerForSingleValueEvent(valueEventListener)
+                    }
 
-                    val listaDeLaMuerte = textView8.text.toString() + "," + marcaSeleccionada.text.toString() + "," + modeloSeleccionado.text.toString()+ "," + "00/00" + "," + nombre.toString() + "," + spinner_gb.getSelectedItem().toString() + "," + editText2.text.toString() + "," + estetica + "," + carcasa + "," + camarat + "," + camarad + "," + pin  + "," + auriculares + "," + parlantef + "," + parlantet + "," + sensorprox + "," + bateria + "," + bateriaporcentaje + "," + wifi + "," + bluetooth + "," + vidrio + "," + modulo + "," + traslucido + "," + editText5.text.toString() + "," + estado + "," + editText6.text.toString() + "," + liberar + "," + portasim + "," + micro + "," + botones + "," + tactil
+                    val listaDeLaMuerte = textView8.text.toString() + "," + marcaSeleccionada.text.toString() + "," + modeloSeleccionado.text.toString()+ "," + "00/00" + "," + usuario + "," + spinner_gb.getSelectedItem().toString() + "," + editText2.text.toString() + "," + estetica + "," + carcasa + "," + camarat + "," + camarad + "," + pin  + "," + auriculares + "," + parlantef + "," + parlantet + "," + sensorprox + "," + bateria + "," + bateriaporcentaje + "," + wifi + "," + bluetooth + "," + vidrio + "," + modulo + "," + traslucido + "," + editText5.text.toString() + "," + estado + "," + editText6.text.toString() + "," + liberar + "," + portasim + "," + micro + "," + botones + "," + tactil
 
                     val s = Socket("18.216.97.211", 42069)
                     s.outputStream.write(listaDeLaMuerte.toByteArray())
@@ -932,7 +953,22 @@ class MainActivity : AppCompatActivity() {
 
                     var estado = "Vendido"
 
+                    if(nombre == ""){
+                        val auth = FirebaseAuth.getInstance()
+                        val progress = ProgressDialog.show(this@MainActivity, "Recuperando nombre de usuario", "Espere un momento", true)
 
+                        val database = FirebaseDatabase.getInstance().reference.child("Users").child(auth.currentUser?.uid.toString())
+                        val valueEventListener: ValueEventListener = object : ValueEventListener {
+                            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                nombre = dataSnapshot.children.elementAt(1).value.toString()
+                                progress.dismiss()
+                            }
+                            override fun onCancelled(databaseError: DatabaseError) {
+                                progress.dismiss()
+                            }
+                        }
+                        database.addListenerForSingleValueEvent(valueEventListener)
+                    }
 
                     val listaDeLaMuerte = textView8.text.toString() + "," + marcaSeleccionada.text.toString() + "," + modeloSeleccionado.text.toString()+ "," + "00/00" + "," + nombre.toString() + "," + spinner_gb.getSelectedItem().toString() + "," + editText2.text.toString() + "," + estetica + "," + carcasa + "," + camarat + "," + camarad + "," + pin  + "," + auriculares + "," + parlantef + "," + parlantet + "," + sensorprox + "," + bateria + "," + bateriaporcentaje + "," + wifi + "," + bluetooth + "," + vidrio + "," + modulo + "," + traslucido + "," + editText5.text.toString() + "," + estado + "," + editText6.text.toString() + "," + liberar + "," + portasim + "," + micro + "," + botones + "," + tactil
 

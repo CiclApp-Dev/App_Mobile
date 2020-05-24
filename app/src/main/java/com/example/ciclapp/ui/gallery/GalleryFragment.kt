@@ -101,6 +101,7 @@ class GalleryFragment : Fragment() {
                     //Pos aca no se hace nada xd
                 }else{
                     val lista_telefonos = retornos_hilo.split("&")
+                    ejemplo_lista_match.clear()
                     for(a in lista_telefonos) {
                         val telefono_actual = a.split(",")
                         val descripcion =
