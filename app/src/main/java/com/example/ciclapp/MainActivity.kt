@@ -78,14 +78,6 @@ class MainActivity : AppCompatActivity() {
         textousuario.text = nombre
         textomail.text = auth.currentUser?.email.toString()
 
-
-        if(nombre=="Benjamin"){
-            val imagenPerfil = headerView.findViewById<View>(R.id.imageView) as ImageView
-            imagenPerfil.setImageResource(R.drawable.july3p)
-            imagenPerfil.layoutParams.height = 256
-            imagenPerfil.layoutParams.width = 256
-        }
-
         // Aca se define lo que hace el boton logout
         logout_button.setOnClickListener{
             Toast.makeText(this, "Sesion finalizada", Toast.LENGTH_LONG).show()
@@ -371,7 +363,7 @@ class MainActivity : AppCompatActivity() {
                         estado = "Liberar"
                     }
 
-                    if(nombre == ""){
+                    if(nombre == "" || nombre == "null"){
                         val auth = FirebaseAuth.getInstance()
                         val progress = ProgressDialog.show(this@MainActivity, "Recuperando nombre de usuario", "Espere un momento", true)
 
@@ -388,7 +380,7 @@ class MainActivity : AppCompatActivity() {
                         database.addListenerForSingleValueEvent(valueEventListener)
                     }
 
-                    val listaDeLaMuerte = textView8.text.toString() + "," + marcaSeleccionada.text.toString() + "," + modeloSeleccionado.text.toString()+ "," + "00/00" + "," + usuario + "," + spinner_gb.getSelectedItem().toString() + "," + editText2.text.toString() + "," + estetica + "," + carcasa + "," + camarat + "," + camarad + "," + pin  + "," + auriculares + "," + parlantef + "," + parlantet + "," + sensorprox + "," + bateria + "," + bateriaporcentaje + "," + wifi + "," + bluetooth + "," + vidrio + "," + modulo + "," + traslucido + "," + editText5.text.toString() + "," + estado + "," + editText6.text.toString() + "," + liberar + "," + portasim + "," + micro + "," + botones + "," + tactil
+                    val listaDeLaMuerte = textView8.text.toString() + "," + marcaSeleccionada.text.toString() + "," + modeloSeleccionado.text.toString()+ "," + "00/00" + "," + nombre + "," + spinner_gb.getSelectedItem().toString() + "," + editText2.text.toString() + "," + estetica + "," + carcasa + "," + camarat + "," + camarad + "," + pin  + "," + auriculares + "," + parlantef + "," + parlantet + "," + sensorprox + "," + bateria + "," + bateriaporcentaje + "," + wifi + "," + bluetooth + "," + vidrio + "," + modulo + "," + traslucido + "," + editText5.text.toString() + "," + estado + "," + editText6.text.toString() + "," + liberar + "," + portasim + "," + micro + "," + botones + "," + tactil
 
                     val s = Socket("18.216.97.211", 42069)
                     s.outputStream.write(listaDeLaMuerte.toByteArray())
@@ -953,7 +945,7 @@ class MainActivity : AppCompatActivity() {
 
                     var estado = "Vendido"
 
-                    if(nombre == ""){
+                    if(nombre == "" || nombre == "null"){
                         val auth = FirebaseAuth.getInstance()
                         val progress = ProgressDialog.show(this@MainActivity, "Recuperando nombre de usuario", "Espere un momento", true)
 
@@ -970,7 +962,7 @@ class MainActivity : AppCompatActivity() {
                         database.addListenerForSingleValueEvent(valueEventListener)
                     }
 
-                    val listaDeLaMuerte = textView8.text.toString() + "," + marcaSeleccionada.text.toString() + "," + modeloSeleccionado.text.toString()+ "," + "00/00" + "," + nombre.toString() + "," + spinner_gb.getSelectedItem().toString() + "," + editText2.text.toString() + "," + estetica + "," + carcasa + "," + camarat + "," + camarad + "," + pin  + "," + auriculares + "," + parlantef + "," + parlantet + "," + sensorprox + "," + bateria + "," + bateriaporcentaje + "," + wifi + "," + bluetooth + "," + vidrio + "," + modulo + "," + traslucido + "," + editText5.text.toString() + "," + estado + "," + editText6.text.toString() + "," + liberar + "," + portasim + "," + micro + "," + botones + "," + tactil
+                    val listaDeLaMuerte = textView8.text.toString() + "," + marcaSeleccionada.text.toString() + "," + modeloSeleccionado.text.toString()+ "," + "00/00" + "," + nombre + "," + spinner_gb.getSelectedItem().toString() + "," + editText2.text.toString() + "," + estetica + "," + carcasa + "," + camarat + "," + camarad + "," + pin  + "," + auriculares + "," + parlantef + "," + parlantet + "," + sensorprox + "," + bateria + "," + bateriaporcentaje + "," + wifi + "," + bluetooth + "," + vidrio + "," + modulo + "," + traslucido + "," + editText5.text.toString() + "," + estado + "," + editText6.text.toString() + "," + liberar + "," + portasim + "," + micro + "," + botones + "," + tactil
 
                     val s = Socket("18.216.97.211", 42069)
                     s.outputStream.write(listaDeLaMuerte.toByteArray())
