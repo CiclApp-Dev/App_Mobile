@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    //Aca empiezan las funciones propias
+    // Aca empiezan las funciones propias
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(resultCode == Activity.RESULT_OK){
             val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
@@ -166,10 +166,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun limpiar(){
+        // Pone todos los datos de la pantalla en cero (Como cuando recien se abre la aplicacion)
         marcaSeleccionada.text = "Seleccione"
         modeloSeleccionado.text = "Seleccione"
         editText2.setText("")
-
         editText4.setText("")
         editText5.setText("")
         editText6.setText("")
@@ -193,13 +193,10 @@ class MainActivity : AppCompatActivity() {
         check_botones.setChecked(false)
         check_tactil.setChecked(false)
         check_camarat.setChecked(false)
-
         spinner_gb.setSelection(0)
-
-
-
     }
 
+    // Cargar o actualizar la version de un telefono (Boton "Cargar")
     fun enviar(){
 
         var tienealgoroto = false
@@ -219,12 +216,11 @@ class MainActivity : AppCompatActivity() {
         }else if(!check_liberar.isChecked()){
             estado = "Liberar"
         }
+
+
+        // Mostrar aviso del estado
         val builder = AlertDialog.Builder(this@MainActivity)
-
-        // Set the alert dialog title
         builder.setTitle("Confirmacion de carga")
-
-        // Display a message on alert dialog
         if (!switch1.isChecked()){
             builder.setMessage("El telefono se cargara con el estado: " + estado + ".\nNo se pudo probar totalmente.\n\nDesea confirmar?")
         }else{
@@ -363,6 +359,7 @@ class MainActivity : AppCompatActivity() {
                         estado = "Liberar"
                     }
 
+
                     if(nombre == "" || nombre == "null"){
                         val auth = FirebaseAuth.getInstance()
                         val progress = ProgressDialog.show(this@MainActivity, "Recuperando nombre de usuario", "Espere un momento", true)
@@ -372,6 +369,7 @@ class MainActivity : AppCompatActivity() {
                             override fun onDataChange(dataSnapshot: DataSnapshot) {
                                 nombre = dataSnapshot.children.elementAt(1).value.toString()
                                 progress.dismiss()
+                                progress.
                             }
                             override fun onCancelled(databaseError: DatabaseError) {
                                 progress.dismiss()
@@ -433,6 +431,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    // Cuando se escanea un codigo, el servidor envia los datos del mismo a la app.
+    // Esta funcion carga dichos datos en sus respectivos botones y opciones
     fun cargar(listaLoca: String) {
         val listarda = listaLoca.split(",")
         textView5.text = listarda[0]
@@ -585,6 +585,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    // Metodo simple para enviar un mensaje al servidor
     fun enviar_mensaje(mensaje: String){
 
         var hilo = Thread(Runnable {
@@ -608,16 +609,15 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    // Metodo para cargar los selectores con busquerda
     fun selectorLoco(titulo: String, conjunto: ArrayList<String>){
         val spinnerLoco = SpinnerDialog(this, conjunto, titulo)
-
         spinnerLoco.setTitleColor(getResources().getColor(R.color.colorBlack))
         spinnerLoco.setSearchIconColor(getResources().getColor(R.color.colorBlack))
         spinnerLoco.setSearchTextColor(getResources().getColor(R.color.colorBlack))
         spinnerLoco.setItemColor(getResources().getColor(R.color.colorBlack))
         spinnerLoco.setItemDividerColor(getResources().getColor(R.color.colorBlack))
         spinnerLoco.setCloseColor(getResources().getColor(R.color.colorBlack))
-
         spinnerLoco.bindOnSpinerListener { item, position ->
             modeloSeleccionado.text = item
         }
@@ -673,6 +673,7 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
     }
 
+    // Poner todos los checkbox en True
     fun checkear(){
         radioGroup2.clearCheck()
         radioGroup3.clearCheck()
@@ -703,6 +704,7 @@ class MainActivity : AppCompatActivity() {
         check_camarat.setChecked(true)
     }
 
+    // Poner todos los checkbox en False
     fun descheckear(){
         radioGroup2.clearCheck()
         radioGroup3.clearCheck()
@@ -727,6 +729,7 @@ class MainActivity : AppCompatActivity() {
         check_camarat.setChecked(false)
     }
 
+    // Eliminar un telefono cuyo codigo ya ha sido escaneado
     fun eliminar_telefono(imei: String){
         val constructor = AlertDialog.Builder(this@MainActivity)
         constructor.setTitle("Eliminar telefono")
@@ -798,6 +801,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    // Cuando se efectua el matcheo de un telefono, este metodo informa todos los datos del mismo
     fun mostrar_datos(imei: String){
         val builder = AlertDialog.Builder(this@MainActivity)
         builder.setTitle("Match correcto")
@@ -813,7 +817,7 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, texto, Toast.LENGTH_LONG).show()
     }
 
-
+    // Informar al servidor que un telefono ha sido vendido
     fun vender(imei: String){
         val builder = AlertDialog.Builder(this@MainActivity)
 
