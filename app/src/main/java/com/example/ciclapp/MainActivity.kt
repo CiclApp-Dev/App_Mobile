@@ -6,6 +6,7 @@ import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
+import android.os.StrictMode
 import android.view.Menu
 import android.view.View
 import android.widget.*
@@ -36,9 +37,8 @@ import java.net.Socket
 
 var versiones = mutableListOf<List<String>>()
 var cantidad = 1
-var retornos_hilo = ""
-var roto = "0"
-var ip_servidor = "18.216.97.211"
+val ip_servidor = "18.216.97.211"
+val puerto_servidor = 42070
 val marcas = arrayListOf("Samsung","Apple","Motorola","Sony","LG","Huawei","Alcatel","Otros")
 val samsung = arrayListOf("Ativ S", "Core Plus", "Galaxy A10", "Galaxy A10e", "Galaxy A10s", "Galaxy A2 Core", "Galaxy A20", "Galaxy A20e", "Galaxy A20s", "Galaxy A3 (2016)", "Galaxy A3 (2017)", "Galaxy A3", "Galaxy A30", "Galaxy A30s", "Galaxy A40", "Galaxy A40s", "Galaxy A5 (2016)", "Galaxy A5 (2017)", "Galaxy A5", "Galaxy A50", "Galaxy A50s", "Galaxy A51", "Galaxy A6 (2018)", "Galaxy A6 Plus (2018)", "Galaxy A60", "Galaxy A6s", "Galaxy A7 (2016)", "Galaxy A7 (2017)", "Galaxy A7 (2018)", "Galaxy A7", "Galaxy A70", "Galaxy A70s", "Galaxy A71", "Galaxy A8 (2016)", "Galaxy A8 (2018)", "Galaxy A8 Star", "Galaxy A8", "Galaxy A8+", "Galaxy A80", "Galaxy A8s", "Galaxy A9 (2016)", "Galaxy A9 (2018)", "Galaxy A9 Pro (2019)", "Galaxy A9 Pro", "Galaxy A9 Star Lite", "Galaxy A9 Star", "Galaxy A90 5G", "Galaxy Ace 2", "Galaxy Ace 3", "Galaxy Ace 4", "Galaxy Ace Duos", "Galaxy Ace Plus", "Galaxy Ace", "Galaxy Alpha", "Galaxy C5 Pro", "Galaxy C5", "Galaxy C7 2017", "Galaxy C7 Pro", "Galaxy C7", "Galaxy C8", "Galaxy C9", "Galaxy Core 2", "Galaxy Core LTE", "Galaxy Core Prime", "Galaxy Core", "Galaxy E5", "Galaxy E7", "Galaxy Express 2", "Galaxy Express", "Galaxy Fold", "Galaxy Grand 2", "Galaxy Grand I9082", "Galaxy Grand Neo Plus", "Galaxy Grand Neo", "Galaxy Grand Prime", "Galaxy Grand Prime+", "Galaxy Grand", "Galaxy J1 (2016)", "Galaxy J1 mini Prime", "Galaxy J1 mini", "Galaxy J1", "Galaxy J2 (2018)", "Galaxy J2 Ace", "Galaxy J2 Core", "Galaxy J2 Prime", "Galaxy J2 Pro", "Galaxy J2", "Galaxy J3 (2016)", "Galaxy J3 (2017)", "Galaxy J3 Pro", "Galaxy J3", "Galaxy J4 (2018)", "Galaxy J4 Core", "Galaxy J4+", "Galaxy J5 (2016)", "Galaxy J5 (2017)", "Galaxy J5 Prime", "Galaxy J5", "Galaxy J6 (2018)", "Galaxy J6+", "Galaxy J7 (2016)", "Galaxy J7 (2017)", "Galaxy J7 (2018)", "Galaxy J7 Max", "Galaxy J7 Nxt", "Galaxy J7 Prime 2", "Galaxy J7 Prime", "Galaxy J7", "Galaxy J7+", "Galaxy J8", "Galaxy Jean2", "Galaxy K zoom", "Galaxy M10", "Galaxy M10S", "Galaxy M20", "Galaxy M30", "Galaxy M30s", "Galaxy M40", "Galaxy Mega 2", "Galaxy Mega 5.8", "Galaxy Mega 6.3", "Galaxy Note 10 Lite", "Galaxy Note 10", "Galaxy Note 3 N9000", "Galaxy Note 3 N9005 LTE", "Galaxy Note 3 Neo LTE+", "Galaxy Note 4", "Galaxy Note 5", "Galaxy Note 7", "Galaxy Note 8", "Galaxy Note 9", "Galaxy Note Edge", "Galaxy Note FE", "Galaxy Note10+", "Galaxy On Max", "Galaxy On Nxt", "Galaxy On5 2016", "Galaxy On5", "Galaxy On6", "Galaxy On7 Prime (2018)", "Galaxy On7", "Galaxy On8", "Galaxy S Luxury Edition", "Galaxy S10 5G", "Galaxy S10 Lite", "Galaxy S10 Plus", "Galaxy S10", "Galaxy S10e", "Galaxy S2 Plus", "Galaxy S20 Ultra", "Galaxy S20+", "Galaxy S3 LTE I9305", "Galaxy S3 Mini VE", "Galaxy S3 Neo", "Galaxy S3 mini", "Galaxy S3", "Galaxy S4 Active", "Galaxy S4 Duos I9502", "Galaxy S4 I9500", "Galaxy S4 I9505", "Galaxy S4 Mini I9195 LTE", "Galaxy S4 mini I9190", "Galaxy S4 mini I9192 Duos", "Galaxy S4 zoom", "Galaxy S5 Duos", "Galaxy S5 Mini", "Galaxy S5 Octa core", "Galaxy S5 Plus", "Galaxy S5", "Galaxy S6 Active", "Galaxy S6 Edge", "Galaxy S6 edge+", "Galaxy S6", "Galaxy S7 Active", "Galaxy S7 Edge", "Galaxy S7", "Galaxy S8 Active", "Galaxy S8", "Galaxy S8+", "Galaxy S9", "Galaxy S9+", "Galaxy Trend II", "Galaxy Trend Lite", "Galaxy Trend Plus", "Galaxy W20 5G", "Galaxy Wide4", "Galaxy Xcover 2", "Galaxy Xcover 3", "Galaxy Xcover 4", "Galaxy Xcover 4s", "Galaxy Young 2", "Galaxy Young", "Z4","Galaxy S20")
 val apple = arrayListOf("iPhone 11", "iPhone 11 Pro", "iPhone 11 Pro Max", "iPhone Xr", "iPhone Xs", "iPhone Xs Max", "iPhone X", "iPhone 8", "iPhone 8 Plus", "iPhone 7", "iPhone 7 Plus", "iPhone SE", "iPhone 6s", "iPhone 6s Plus", "iPhone 6", "iPhone 6 Plus", "iPhone 5s", "iPhone 5c", "iPhone 5", "iPhone 4S", "iPhone 4")
@@ -51,14 +51,17 @@ val otros = arrayListOf("Otros")
 var recargar = 0
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var appBarConfiguration: AppBarConfiguration
 
+    // Cosas que se hacen al cargar la Activity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+
+        val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+        StrictMode.setThreadPolicy(policy)
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
@@ -88,54 +91,39 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Inflar menu -No tocar-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
         return true
     }
 
+    // Cargar Navs -No tocar-
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    // Aca empiezan las funciones propias
+    // Funcion para cargar el codigo QR
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(resultCode == Activity.RESULT_OK){
             val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
             if (result != null) {
                 if (result.contents == null) {
-                    Toast.makeText(this, "Escaneo cancelado", Toast.LENGTH_LONG).show()
+                    this.mostrar_toast("Escaneo cancelado")
                 } else {
-                    Toast.makeText(this, "Escaneado: " + result.contents, Toast.LENGTH_LONG).show()
-                    Thread(Runnable {
-                        try {
-                            val s = Socket(ip_servidor, 42069)
-                            //val caca = (MensajeEscrito.text).toString()
-                            s.outputStream.write(result.contents.toByteArray())
-                            val mensajito = BufferedReader(InputStreamReader(s.getInputStream()))
-                            val ServerMessage = mensajito.readLine()
-                            s.close()
-                            runOnUiThread(object:Runnable{
-                                public override fun run() {
-                                    if(ServerMessage == "NewPhone"){
-                                        textView5.text = "Sin asignar"
-                                        textView8.text = result.contents
-                                        limpiar()
-                                    } else {
-                                        limpiar()
-                                        cargar(ServerMessage)
-                                    }
-                                }
-                            })
-                        }catch (e: Exception) {
-                            runOnUiThread(object:Runnable{
-                                public override fun run() {
-                                    Toast.makeText(this@MainActivity, "No hay conexion", Toast.LENGTH_LONG).show()
-                                }
-                            })
-                        }
-                    }).start()
+                    this.mostrar_toast("Escaneado: " + result.contents)
+                    val ServerMessage = enviar_mensaje(result.contents)
+                    if(ServerMessage == "NewPhone"){
+                        textView5.text = "Sin asignar"
+                        textView8.text = result.contents
+                        limpiar(0)
+                    } else if(ServerMessage == "Error"){
+
+                    }else {
+                        limpiar(0)
+                        cargar(ServerMessage)
+                    }
                 }
             } else {
                 super.onActivityResult(requestCode, resultCode, data)
@@ -143,6 +131,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Funcion para cargar los selectores de marca/modelo
     fun selector(){
         if (marcaSeleccionada.text == "Samsung") {
             selectorLoco(marcaSeleccionada.text.toString(), samsung)
@@ -165,39 +154,98 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun limpiar(){
-        // Pone todos los datos de la pantalla en cero (Como cuando recien se abre la aplicacion)
-        marcaSeleccionada.text = "Seleccione"
-        modeloSeleccionado.text = "Seleccione"
-        editText2.setText("")
-        editText4.setText("")
-        editText5.setText("")
-        editText6.setText("")
-        radioGroup2.clearCheck()
-        radioGroup3.clearCheck()
-        radioGroup4.clearCheck()
-        radioGroup5.clearCheck()
-        radioGroup6.clearCheck()
-        check_wifi.setChecked(false)
-        check_bluetooth.setChecked(false)
-        check_parlantet.setChecked(false)
-        check_auricular.setChecked(false)
-        check_portasim.setChecked(false)
-        check_parlanted.setChecked(false)
-        check_microfono.setChecked(false)
-        check_liberar.setChecked(false)
-        check_sensor.setChecked(false)
-        check_carcasa.setChecked(false)
-        check_pincarga.setChecked(false)
-        check_camarad.setChecked(false)
-        check_botones.setChecked(false)
-        check_tactil.setChecked(false)
-        check_camarat.setChecked(false)
-        spinner_gb.setSelection(0)
+    // 0- Restaura la pantalla a su estado inicial (Cuando se abre la app)
+    // 1- Checkea lo del medio
+    // 2- Descheckea lo del medio
+    fun limpiar(seleccion: Int){
+        if(seleccion == 0){
+            marcaSeleccionada.text = "Seleccione"
+            modeloSeleccionado.text = "Seleccione"
+            editText2.setText("")
+            editText4.setText("")
+            editText5.setText("")
+            editText6.setText("")
+            radioGroup2.clearCheck()
+            radioGroup3.clearCheck()
+            radioGroup4.clearCheck()
+            radioGroup5.clearCheck()
+            radioGroup6.clearCheck()
+            check_wifi.setChecked(false)
+            check_bluetooth.setChecked(false)
+            check_parlantet.setChecked(false)
+            check_auricular.setChecked(false)
+            check_portasim.setChecked(false)
+            check_parlanted.setChecked(false)
+            check_microfono.setChecked(false)
+            check_liberar.setChecked(false)
+            check_sensor.setChecked(false)
+            check_carcasa.setChecked(false)
+            check_pincarga.setChecked(false)
+            check_camarad.setChecked(false)
+            check_botones.setChecked(false)
+            check_tactil.setChecked(false)
+            check_camarat.setChecked(false)
+            spinner_gb.setSelection(0)
+        }
+
+        else if (seleccion == 1){
+            radioGroup2.clearCheck()
+            radioGroup3.clearCheck()
+            radioGroup4.clearCheck()
+            radioGroup5.clearCheck()
+            radioGroup6.clearCheck()
+
+            radioButton7.setChecked(true)
+            radioButton4.setChecked(true)
+            radioButton10.setChecked(true)
+            radioButton14.setChecked(true)
+            radioButton19.setChecked(true)
+
+            check_wifi.setChecked(true)
+            check_bluetooth.setChecked(true)
+            check_parlantet.setChecked(true)
+            check_auricular.setChecked(true)
+            check_portasim.setChecked(true)
+            check_parlanted.setChecked(true)
+            check_microfono.setChecked(true)
+            check_liberar.setChecked(true)
+            check_sensor.setChecked(true)
+            check_carcasa.setChecked(true)
+            check_pincarga.setChecked(true)
+            check_camarad.setChecked(true)
+            check_botones.setChecked(true)
+            check_tactil.setChecked(true)
+            check_camarat.setChecked(true)
+        }
+
+        else if (seleccion == 2){
+            radioGroup2.clearCheck()
+            radioGroup3.clearCheck()
+            radioGroup4.clearCheck()
+            radioGroup5.clearCheck()
+            radioGroup6.clearCheck()
+
+            check_wifi.setChecked(false)
+            check_bluetooth.setChecked(false)
+            check_parlantet.setChecked(false)
+            check_auricular.setChecked(false)
+            check_portasim.setChecked(false)
+            check_parlanted.setChecked(false)
+            check_microfono.setChecked(false)
+            check_liberar.setChecked(false)
+            check_sensor.setChecked(false)
+            check_carcasa.setChecked(false)
+            check_pincarga.setChecked(false)
+            check_camarad.setChecked(false)
+            check_botones.setChecked(false)
+            check_tactil.setChecked(false)
+            check_camarat.setChecked(false)
+        }
     }
 
-    // Cargar o actualizar la version de un telefono (Boton "Cargar")
-    fun enviar(){
+    // 0- Cargar o actualizar la version de un telefono (Boton "Cargar")
+    // 1- Vender un telefono (Boton "Vender")
+    fun enviar(seleccion: Int){
 
         var tienealgoroto = false
         if(radioButton5.isChecked() || !check_wifi.isChecked() || !check_bluetooth.isChecked() || !check_parlantet.isChecked() || !check_auricular.isChecked() || !check_portasim.isChecked() || !check_parlanted.isChecked() || !check_microfono.isChecked() || !check_liberar.isChecked() || !check_sensor.isChecked() || !check_carcasa.isChecked() || !check_pincarga.isChecked() || !check_camarad.isChecked() || !check_camarat.isChecked() || !check_botones.isChecked() || !check_tactil.isChecked()){
@@ -218,217 +266,194 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        // Mostrar aviso del estado
+        // Mostrar aviso del estado o venta
         val builder = AlertDialog.Builder(this@MainActivity)
-        builder.setTitle("Confirmacion de carga")
-        if (!switch1.isChecked()){
-            builder.setMessage("El telefono se cargara con el estado: " + estado + ".\nNo se pudo probar totalmente.\n\nDesea confirmar?")
+        if(seleccion == 0){
+            builder.setTitle("Confirmacion de carga")
+            if (!switch1.isChecked()){
+                builder.setMessage("El telefono se cargara con el estado: " + estado + ".\nNo se pudo probar totalmente.\n\nDesea confirmar?")
+            }else{
+                builder.setMessage("El telefono se cargara con el estado: " + estado + ".\nSe pudo probar totalmente.\n\nDesea confirmar?")
+            }
         }else{
-            builder.setMessage("El telefono se cargara con el estado: " + estado + ".\nSe pudo probar totalmente.\n\nDesea confirmar?")
+            builder.setTitle("Confirmacion de venta")
+            builder.setMessage("Esta seguro que desea marcar como vendido el telefono escaneado?")
         }
+
 
         // Set a positive button and its click listener on alert dialog
         builder.setPositiveButton("Si"){dialog, which ->
-            Thread(Runnable {
-                try {
-                    var estetica = ""
-                    if(radioButton7.isChecked()){
-                        estetica = "A"
-                    }else if (radioButton8.isChecked()){
-                        estetica = "B"
-                    }else {
-                        estetica = "C"
-                    }
+            var estetica = ""
+            if(radioButton7.isChecked()){
+                estetica = "A"
+            }else if (radioButton8.isChecked()){
+                estetica = "B"
+            }else {
+                estetica = "C"
+            }
 
-                    var carcasa = "X"
-                    if(check_carcasa.isChecked()){
-                        carcasa = "-"
-                    }
-                    var camarat = "X"
-                    if(check_camarat.isChecked()){
-                        camarat = "-"
-                    }
-                    var camarad = "X"
-                    if(check_camarad.isChecked()) {
-                        camarad = "-"
-                    }
-                    var pin = "X"
-                    if(check_pincarga.isChecked()){
-                        pin = "-"
-                    }
-                    var auriculares = "X"
-                    if(check_auricular.isChecked()){
-                        auriculares = "-"
-                    }
-                    var parlantef = "X"
-                    if(check_parlanted.isChecked()){
-                        parlantef = "-"
-                    }
-                    var parlantet = "X"
-                    if(check_parlantet.isChecked()){
-                        parlantet = "-"
-                    }
-                    var sensorprox = "X"
-                    if(check_sensor.isChecked()){
-                        sensorprox = "-"
-                    }
-                    var bateria = "X"
-                    if(radioButton4.isChecked()){
-                        bateria = "-"
-                    }
-                    var bateriaporcentaje = editText4.text.toString()
-                    var wifi = "X"
-                    if(check_wifi.isChecked()){
-                        wifi="-"
-                    }
-                    var bluetooth = "X"
-                    if(check_bluetooth.isChecked()){
-                        bluetooth = "-"
-                    }
-                    var liberar = "X"
-                    if(check_liberar.isChecked()){
-                        liberar = "-"
-                    }
-                    var portasim = "X"
-                    if(check_portasim.isChecked()){
-                        portasim = "-"
-                    }
-                    var micro = "X"
-                    if(check_microfono.isChecked()){
-                        micro = "-"
-                    }
-                    var botones = "X"
-                    if(check_botones.isChecked()){
-                        botones ="-"
-                    }
-                    var tactil = "X"
-                    if(check_tactil.isChecked()){
-                        tactil="-"
-                    }
-                    var vidrio = ""
-                    if(radioButton10.isChecked()){
-                        vidrio = "OK"
-                    }else if (radioButton11.isChecked()){
-                        vidrio = "A"
-                    }else if (radioButton12.isChecked()){
-                        vidrio = "B"
-                    }else if (radioButton13.isChecked()){
-                        vidrio = "NO"
-                    }
+            var carcasa = "X"
+            if(check_carcasa.isChecked()){
+                carcasa = "-"
+            }
+            var camarat = "X"
+            if(check_camarat.isChecked()){
+                camarat = "-"
+            }
+            var camarad = "X"
+            if(check_camarad.isChecked()) {
+                camarad = "-"
+            }
+            var pin = "X"
+            if(check_pincarga.isChecked()){
+                pin = "-"
+            }
+            var auriculares = "X"
+            if(check_auricular.isChecked()){
+                auriculares = "-"
+            }
+            var parlantef = "X"
+            if(check_parlanted.isChecked()){
+                parlantef = "-"
+            }
+            var parlantet = "X"
+            if(check_parlantet.isChecked()){
+                parlantet = "-"
+            }
+            var sensorprox = "X"
+            if(check_sensor.isChecked()){
+                sensorprox = "-"
+            }
+            var bateria = "X"
+            if(radioButton4.isChecked()){
+                bateria = "-"
+            }
+            var bateriaporcentaje = editText4.text.toString()
+            var wifi = "X"
+            if(check_wifi.isChecked()){
+                wifi="-"
+            }
+            var bluetooth = "X"
+            if(check_bluetooth.isChecked()){
+                bluetooth = "-"
+            }
+            var liberar = "X"
+            if(check_liberar.isChecked()){
+                liberar = "-"
+            }
+            var portasim = "X"
+            if(check_portasim.isChecked()){
+                portasim = "-"
+            }
+            var micro = "X"
+            if(check_microfono.isChecked()){
+                micro = "-"
+            }
+            var botones = "X"
+            if(check_botones.isChecked()){
+                botones ="-"
+            }
+            var tactil = "X"
+            if(check_tactil.isChecked()){
+                tactil="-"
+            }
+            var vidrio = ""
+            if(radioButton10.isChecked()){
+                vidrio = "OK"
+            }else if (radioButton11.isChecked()){
+                vidrio = "A"
+            }else if (radioButton12.isChecked()){
+                vidrio = "B"
+            }else if (radioButton13.isChecked()){
+                vidrio = "NO"
+            }
 
-                    var modulo = ""
-                    if(radioButton14.isChecked()){
-                        modulo = "OK"
-                    }else if(radioButton15.isChecked()){
-                        modulo = "A"
-                    }else if(radioButton16.isChecked()){
-                        modulo = "B"
-                    }else if(radioButton17.isChecked()){
-                        modulo = "C"
-                    }else if(radioButton18.isChecked()){
-                        modulo = "NO"
-                    }
+            var modulo = ""
+            if(radioButton14.isChecked()){
+                modulo = "OK"
+            }else if(radioButton15.isChecked()){
+                modulo = "A"
+            }else if(radioButton16.isChecked()){
+                modulo = "B"
+            }else if(radioButton17.isChecked()){
+                modulo = "C"
+            }else if(radioButton18.isChecked()){
+                modulo = "NO"
+            }
 
-                    var traslucido = ""
-                    if(radioButton19.isChecked()){
-                        traslucido = "A"
-                    }else if(radioButton20.isChecked()){
-                        traslucido = "B"
-                    }else if(radioButton21.isChecked()){
-                        traslucido = "C"
-                    }else if(radioButton13.isChecked()){
-                        traslucido = "D"
-                    }
+            var traslucido = ""
+            if(radioButton19.isChecked()){
+                traslucido = "A"
+            }else if(radioButton20.isChecked()){
+                traslucido = "B"
+            }else if(radioButton21.isChecked()){
+                traslucido = "C"
+            }else if(radioButton13.isChecked()){
+                traslucido = "D"
+            }
 
 
-                    var tienealgoroto = false
-                    if(radioButton5.isChecked() || !check_wifi.isChecked() || !check_bluetooth.isChecked() || !check_parlantet.isChecked() || !check_auricular.isChecked() || !check_portasim.isChecked() || !check_parlanted.isChecked() || !check_microfono.isChecked() || !check_liberar.isChecked() || !check_sensor.isChecked() || !check_carcasa.isChecked() || !check_pincarga.isChecked() || !check_camarad.isChecked() || !check_camarat.isChecked() || !check_botones.isChecked() || !check_tactil.isChecked()){
-                        tienealgoroto = true
+            var tienealgoroto = false
+            if(radioButton5.isChecked() || !check_wifi.isChecked() || !check_bluetooth.isChecked() || !check_parlantet.isChecked() || !check_auricular.isChecked() || !check_portasim.isChecked() || !check_parlanted.isChecked() || !check_microfono.isChecked() || !check_liberar.isChecked() || !check_sensor.isChecked() || !check_carcasa.isChecked() || !check_pincarga.isChecked() || !check_camarad.isChecked() || !check_camarat.isChecked() || !check_botones.isChecked() || !check_tactil.isChecked()){
+                tienealgoroto = true
+            }
+
+            var estado = "Listo para Vender"
+            if (!switch1.isChecked()){
+                estado = "Repuesto"
+            }else if(radioButton18.isChecked()){
+                estado = "Cambiar Modulo"
+            }else if(radioButton13.isChecked()){
+                estado = "Cambiar Vidrio"
+            }else if(tienealgoroto == true){
+                estado = "Reparar"
+            }else if(!check_liberar.isChecked()){
+                estado = "Liberar"
+            }
+
+            if(seleccion == 1){
+                estado = "Vendido"
+            }
+
+            if(nombre == "" || nombre == "null"){
+                val auth = FirebaseAuth.getInstance()
+                val progress = ProgressDialog.show(this@MainActivity, "Recuperando nombre de usuario", "Espere un momento", true)
+
+                val database = FirebaseDatabase.getInstance().reference.child("Users").child(auth.currentUser?.uid.toString())
+                val valueEventListener: ValueEventListener = object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        nombre = dataSnapshot.children.elementAt(1).value.toString()
+                        progress.dismiss()
                     }
-
-                    var estado = "Listo para Vender"
-                    if (!switch1.isChecked()){
-                        estado = "Repuesto"
-                    }else if(radioButton18.isChecked()){
-                        estado = "Cambiar Modulo"
-                    }else if(radioButton13.isChecked()){
-                        estado = "Cambiar Vidrio"
-                    }else if(tienealgoroto == true){
-                        estado = "Reparar"
-                    }else if(!check_liberar.isChecked()){
-                        estado = "Liberar"
+                    override fun onCancelled(databaseError: DatabaseError) {
+                        progress.dismiss()
                     }
-
-
-                    if(nombre == "" || nombre == "null"){
-                        val auth = FirebaseAuth.getInstance()
-                        val progress = ProgressDialog.show(this@MainActivity, "Recuperando nombre de usuario", "Espere un momento", true)
-
-                        val database = FirebaseDatabase.getInstance().reference.child("Users").child(auth.currentUser?.uid.toString())
-                        val valueEventListener: ValueEventListener = object : ValueEventListener {
-                            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                                nombre = dataSnapshot.children.elementAt(1).value.toString()
-                                progress.dismiss()
-                                progress.
-                            }
-                            override fun onCancelled(databaseError: DatabaseError) {
-                                progress.dismiss()
-                            }
-                        }
-                        database.addListenerForSingleValueEvent(valueEventListener)
-                    }
-
-                    val listaDeLaMuerte = textView8.text.toString() + "," + marcaSeleccionada.text.toString() + "," + modeloSeleccionado.text.toString()+ "," + "00/00" + "," + nombre + "," + spinner_gb.getSelectedItem().toString() + "," + editText2.text.toString() + "," + estetica + "," + carcasa + "," + camarat + "," + camarad + "," + pin  + "," + auriculares + "," + parlantef + "," + parlantet + "," + sensorprox + "," + bateria + "," + bateriaporcentaje + "," + wifi + "," + bluetooth + "," + vidrio + "," + modulo + "," + traslucido + "," + editText5.text.toString() + "," + estado + "," + editText6.text.toString() + "," + liberar + "," + portasim + "," + micro + "," + botones + "," + tactil
-
-                    val s = Socket("18.216.97.211", 42069)
-                    s.outputStream.write(listaDeLaMuerte.toByteArray())
-                    val mensajito = BufferedReader(InputStreamReader(s.getInputStream()))
-                    val ServerMessage = mensajito.readLine()
-                    s.close()
-                    if(ServerMessage=="Ok"){
-
-                        runOnUiThread(object:Runnable{
-                            public override fun run() {
-                                Toast.makeText(this@MainActivity, "Telefono cargado con exito", Toast.LENGTH_LONG).show()
-                                limpiar()
-                                textView8.text = "Sin cargar"
-                                textView5.text = "Sin cargar"
-                            }
-                        })
-
-                    }else if(ServerMessage!="Ok"){
-                        runOnUiThread(object:Runnable{
-                            public override fun run() {
-                                Toast.makeText(this@MainActivity, "Error", Toast.LENGTH_LONG).show()
-
-                            }
-                        })
-
-                    }
-                }catch (e: Exception) {
-                    runOnUiThread(object:Runnable{
-                        public override fun run() {
-                            Toast.makeText(this@MainActivity, "No hay conexion", Toast.LENGTH_LONG).show()
-                        }
-                    })
                 }
-            }).start()
+                database.addListenerForSingleValueEvent(valueEventListener)
+            }
+
+            val listaDeLaMuerte = textView8.text.toString() + "," + marcaSeleccionada.text.toString() + "," + modeloSeleccionado.text.toString()+ "," + "00/00" + "," + nombre + "," + spinner_gb.getSelectedItem().toString() + "," + editText2.text.toString() + "," + estetica + "," + carcasa + "," + camarat + "," + camarad + "," + pin  + "," + auriculares + "," + parlantef + "," + parlantet + "," + sensorprox + "," + bateria + "," + bateriaporcentaje + "," + wifi + "," + bluetooth + "," + vidrio + "," + modulo + "," + traslucido + "," + editText5.text.toString() + "," + estado + "," + editText6.text.toString() + "," + liberar + "," + portasim + "," + micro + "," + botones + "," + tactil
+
+            val ServerMessage = enviar_mensaje(listaDeLaMuerte)
+            if(ServerMessage=="Ok"){
+                if(seleccion == 0){
+                    this.mostrar_toast("Telefono cargado con exito")
+                }else{
+                    this.mostrar_toast("Telefono vendido con exito")
+                }
+                limpiar(0)
+                textView8.text = "Sin cargar"
+                textView5.text = "Sin cargar"
+            }
         }
 
-        // Display a negative button on alert dialog
+        // Cancelar
         builder.setNegativeButton("No"){dialog,which ->
             Toast.makeText(applicationContext,"No se ha cargado el telefono",Toast.LENGTH_SHORT).show()
         }
 
-        // Finally, make the alert dialog using builder
         val dialog: AlertDialog = builder.create()
-
-        // Display the alert dialog on app interface
         dialog.show()
-
-
-
-
     }
 
     // Cuando se escanea un codigo, el servidor envia los datos del mismo a la app.
@@ -586,27 +611,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Metodo simple para enviar un mensaje al servidor
-    fun enviar_mensaje(mensaje: String){
-
-        var hilo = Thread(Runnable {
-            try {
-
-                val s = Socket("18.216.97.211", 42069)
-                s.outputStream.write(mensaje.toByteArray())
-                val mensajito = BufferedReader(InputStreamReader(s.getInputStream()))
-                retornos_hilo = mensajito.readLines().joinToString("\n")
-                s.close()
-            }catch (e: Exception) {
-                roto = "1"
-                retornos_hilo = "nada nadita"
-            }
-        })
-        hilo.start()
-        hilo.join()
-        if(retornos_hilo == "nada nadita"){
+    fun enviar_mensaje(mensaje: String): String{
+        try {
+            val s = Socket(ip_servidor, puerto_servidor)
+            s.outputStream.write(mensaje.toByteArray())
+            val mensajito = BufferedReader(InputStreamReader(s.getInputStream()))
+            val retornar = mensajito.readLines().joinToString("\n")
+            s.close()
+            return retornar
+        }catch (e: Exception) {
             mostrar_toast("Error de conexion")
+            return "Error"
         }
-
     }
 
     // Metodo para cargar los selectores con busquerda
@@ -624,6 +640,7 @@ class MainActivity : AppCompatActivity() {
         spinnerLoco.showSpinerDialog()
     }
 
+    // Mensaje con los datos que faltan
     fun mostrar_mensaje_error(){
         // Ver que datos faltan
         var mensaje_a_enviar = "Faltan los siguientes datos: \n"
@@ -655,7 +672,7 @@ class MainActivity : AppCompatActivity() {
 
         // Set a positive button and its click listener on alert dialog
         builder.setPositiveButton("Si"){dialog, which ->
-            enviar()
+            enviar(0)
         }
 
 
@@ -673,119 +690,33 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    // Poner todos los checkbox en True
-    fun checkear(){
-        radioGroup2.clearCheck()
-        radioGroup3.clearCheck()
-        radioGroup4.clearCheck()
-        radioGroup5.clearCheck()
-        radioGroup6.clearCheck()
-
-        radioButton7.setChecked(true)
-        radioButton4.setChecked(true)
-        radioButton10.setChecked(true)
-        radioButton14.setChecked(true)
-        radioButton19.setChecked(true)
-
-        check_wifi.setChecked(true)
-        check_bluetooth.setChecked(true)
-        check_parlantet.setChecked(true)
-        check_auricular.setChecked(true)
-        check_portasim.setChecked(true)
-        check_parlanted.setChecked(true)
-        check_microfono.setChecked(true)
-        check_liberar.setChecked(true)
-        check_sensor.setChecked(true)
-        check_carcasa.setChecked(true)
-        check_pincarga.setChecked(true)
-        check_camarad.setChecked(true)
-        check_botones.setChecked(true)
-        check_tactil.setChecked(true)
-        check_camarat.setChecked(true)
-    }
-
-    // Poner todos los checkbox en False
-    fun descheckear(){
-        radioGroup2.clearCheck()
-        radioGroup3.clearCheck()
-        radioGroup4.clearCheck()
-        radioGroup5.clearCheck()
-        radioGroup6.clearCheck()
-
-        check_wifi.setChecked(false)
-        check_bluetooth.setChecked(false)
-        check_parlantet.setChecked(false)
-        check_auricular.setChecked(false)
-        check_portasim.setChecked(false)
-        check_parlanted.setChecked(false)
-        check_microfono.setChecked(false)
-        check_liberar.setChecked(false)
-        check_sensor.setChecked(false)
-        check_carcasa.setChecked(false)
-        check_pincarga.setChecked(false)
-        check_camarad.setChecked(false)
-        check_botones.setChecked(false)
-        check_tactil.setChecked(false)
-        check_camarat.setChecked(false)
-    }
-
     // Eliminar un telefono cuyo codigo ya ha sido escaneado
     fun eliminar_telefono(imei: String){
         val constructor = AlertDialog.Builder(this@MainActivity)
         constructor.setTitle("Eliminar telefono")
         constructor.setMessage("Desea antes agregar los repuestos al inventario?")
 
-
         constructor.setPositiveButton("Si") { dialog, which ->
             val transaction = supportFragmentManager.beginTransaction()
             transaction.replace(R.id.nav_host_fragment, GalleryFragment())
             transaction.commit()
-
-
         }
-
 
         constructor.setNegativeButton("No") { dialog, which ->
             val builder = AlertDialog.Builder(this@MainActivity)
             builder.setTitle("Seguro que desea eliminar el telefono?")
             builder.setMessage("Esta accion no se puede deshacer")
 
-
-
             // Set a positive button and its click listener on alert dialog
             builder.setPositiveButton("Si"){dialog, which ->
-                val mensaje_enviar = "delete,,,," + imei
-                Thread(Runnable {
-                    try {
-                        val s = Socket("18.216.97.211", 42069)
-                        s.outputStream.write(mensaje_enviar.toByteArray())
-                        val mensajito = BufferedReader(InputStreamReader(s.getInputStream()))
-                        val ServerMessage = mensajito.readLine()
-                        s.close()
-                        if(ServerMessage.toString() == "ok"){
-                            runOnUiThread(object:Runnable{
-                                public override fun run() {
-                                    Toast.makeText(this@MainActivity, "Telefono eliminado con exito", Toast.LENGTH_LONG).show()
-                                    limpiar()
-                                    textView8.text = "Sin cargar"
-                                    textView5.text = "Sin cargar"
-                                }
-                            })
-                        }else {
-                            runOnUiThread(object:Runnable{
-                                public override fun run() {
-                                    Toast.makeText(this@MainActivity, "No se pudo eliminar el telefono", Toast.LENGTH_LONG).show()
-                                }
-                            })
-                        }
-                    }catch (e: Exception) {
-                        runOnUiThread(object:Runnable{
-                            public override fun run() {
-                                Toast.makeText(this@MainActivity, "No hay conexion", Toast.LENGTH_LONG).show()
-                            }
-                        })
-                    }
-                }).start()
+                val mensaje_enviar = "5," + imei
+                val ServerMessage = enviar_mensaje(mensaje_enviar)
+                if(ServerMessage.toString() == "ok"){
+                            this.mostrar_toast("Telefono eliminado con exito")
+                            limpiar(0)
+                            textView8.text = "Sin cargar"
+                            textView5.text = "Sin cargar"
+                }
             }
 
             // Display a negative button on alert dialog
@@ -797,222 +728,23 @@ class MainActivity : AppCompatActivity() {
             val dialog: AlertDialog = builder.create()
             dialog.show()
         }
-        constructor.show()
 
+        constructor.show()
     }
 
     // Cuando se efectua el matcheo de un telefono, este metodo informa todos los datos del mismo
     fun mostrar_datos(imei: String){
         val builder = AlertDialog.Builder(this@MainActivity)
         builder.setTitle("Match correcto")
-        enviar_mensaje(",,," + imei)
-        val mensaje = retornos_hilo
+        val mensaje = enviar_mensaje("4," + imei)
         builder.setMessage(mensaje)
         builder.setPositiveButton("Ok"){dialog,which -> }
         val dialog: AlertDialog = builder.create()
         dialog.show()
     }
 
+    // Mostrar un toast :)
     fun mostrar_toast(texto: String){
         Toast.makeText(this, texto, Toast.LENGTH_LONG).show()
-    }
-
-    // Informar al servidor que un telefono ha sido vendido
-    fun vender(imei: String){
-        val builder = AlertDialog.Builder(this@MainActivity)
-
-        // Set the alert dialog title
-        builder.setTitle("Confirmacion de venta")
-
-        // Display a message on alert dialog
-        builder.setMessage("Esta seguro que desea marcar como vendido el telefono con imei " + imei + "?")
-
-        // Set a positive button and its click listener on alert dialog
-        builder.setPositiveButton("Si"){dialog, which ->
-
-            Thread(Runnable {
-                try {
-                    var estetica = ""
-                    if(radioButton7.isChecked()){
-                        estetica = "A"
-                    }else if (radioButton8.isChecked()){
-                        estetica = "B"
-                    }else {
-                        estetica = "C"
-                    }
-
-                    var carcasa = "X"
-                    if(check_carcasa.isChecked()){
-                        carcasa = "-"
-                    }
-                    var camarat = "X"
-                    if(check_camarat.isChecked()){
-                        camarat = "-"
-                    }
-                    var camarad = "X"
-                    if(check_camarad.isChecked()) {
-                        camarad = "-"
-                    }
-                    var pin = "X"
-                    if(check_pincarga.isChecked()){
-                        pin = "-"
-                    }
-                    var auriculares = "X"
-                    if(check_auricular.isChecked()){
-                        auriculares = "-"
-                    }
-                    var parlantef = "X"
-                    if(check_parlanted.isChecked()){
-                        parlantef = "-"
-                    }
-                    var parlantet = "X"
-                    if(check_parlantet.isChecked()){
-                        parlantet = "-"
-                    }
-                    var sensorprox = "X"
-                    if(check_sensor.isChecked()){
-                        sensorprox = "-"
-                    }
-                    var bateria = "X"
-                    if(radioButton4.isChecked()){
-                        bateria = "-"
-                    }
-                    var bateriaporcentaje = editText4.text.toString()
-                    var wifi = "X"
-                    if(check_wifi.isChecked()){
-                        wifi="-"
-                    }
-                    var bluetooth = "X"
-                    if(check_bluetooth.isChecked()){
-                        bluetooth = "-"
-                    }
-                    var liberar = "X"
-                    if(check_liberar.isChecked()){
-                        liberar = "-"
-                    }
-                    var portasim = "X"
-                    if(check_portasim.isChecked()){
-                        portasim = "-"
-                    }
-                    var micro = "X"
-                    if(check_microfono.isChecked()){
-                        micro = "-"
-                    }
-                    var botones = "X"
-                    if(check_botones.isChecked()){
-                        botones ="-"
-                    }
-                    var tactil = "X"
-                    if(check_tactil.isChecked()){
-                        tactil="-"
-                    }
-                    var vidrio = ""
-                    if(radioButton10.isChecked()){
-                        vidrio = "OK"
-                    }else if (radioButton11.isChecked()){
-                        vidrio = "A"
-                    }else if (radioButton12.isChecked()){
-                        vidrio = "B"
-                    }else if (radioButton13.isChecked()){
-                        vidrio = "NO"
-                    }
-
-                    var modulo = ""
-                    if(radioButton14.isChecked()){
-                        modulo = "OK"
-                    }else if(radioButton15.isChecked()){
-                        modulo = "A"
-                    }else if(radioButton16.isChecked()){
-                        modulo = "B"
-                    }else if(radioButton17.isChecked()){
-                        modulo = "C"
-                    }else if(radioButton18.isChecked()){
-                        modulo = "NO"
-                    }
-
-                    var traslucido = ""
-                    if(radioButton19.isChecked()){
-                        traslucido = "A"
-                    }else if(radioButton20.isChecked()){
-                        traslucido = "B"
-                    }else if(radioButton21.isChecked()){
-                        traslucido = "C"
-                    }else if(radioButton13.isChecked()){
-                        traslucido = "D"
-                    }
-
-
-                    var tienealgoroto = false
-                    if(radioButton5.isChecked() || !check_wifi.isChecked() || !check_bluetooth.isChecked() || !check_parlantet.isChecked() || !check_auricular.isChecked() || !check_portasim.isChecked() || !check_parlanted.isChecked() || !check_microfono.isChecked() || !check_liberar.isChecked() || !check_sensor.isChecked() || !check_carcasa.isChecked() || !check_pincarga.isChecked() || !check_camarad.isChecked() || !check_camarat.isChecked() || !check_botones.isChecked() || !check_tactil.isChecked()){
-                        tienealgoroto = true
-                    }
-
-                    var estado = "Vendido"
-
-                    if(nombre == "" || nombre == "null"){
-                        val auth = FirebaseAuth.getInstance()
-                        val progress = ProgressDialog.show(this@MainActivity, "Recuperando nombre de usuario", "Espere un momento", true)
-
-                        val database = FirebaseDatabase.getInstance().reference.child("Users").child(auth.currentUser?.uid.toString())
-                        val valueEventListener: ValueEventListener = object : ValueEventListener {
-                            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                                nombre = dataSnapshot.children.elementAt(1).value.toString()
-                                progress.dismiss()
-                            }
-                            override fun onCancelled(databaseError: DatabaseError) {
-                                progress.dismiss()
-                            }
-                        }
-                        database.addListenerForSingleValueEvent(valueEventListener)
-                    }
-
-                    val listaDeLaMuerte = textView8.text.toString() + "," + marcaSeleccionada.text.toString() + "," + modeloSeleccionado.text.toString()+ "," + "00/00" + "," + nombre + "," + spinner_gb.getSelectedItem().toString() + "," + editText2.text.toString() + "," + estetica + "," + carcasa + "," + camarat + "," + camarad + "," + pin  + "," + auriculares + "," + parlantef + "," + parlantet + "," + sensorprox + "," + bateria + "," + bateriaporcentaje + "," + wifi + "," + bluetooth + "," + vidrio + "," + modulo + "," + traslucido + "," + editText5.text.toString() + "," + estado + "," + editText6.text.toString() + "," + liberar + "," + portasim + "," + micro + "," + botones + "," + tactil
-
-                    val s = Socket("18.216.97.211", 42069)
-                    s.outputStream.write(listaDeLaMuerte.toByteArray())
-                    val mensajito = BufferedReader(InputStreamReader(s.getInputStream()))
-                    val ServerMessage = mensajito.readLine()
-                    s.close()
-                    if(ServerMessage=="Ok"){
-
-                        runOnUiThread(object:Runnable{
-                            public override fun run() {
-                                Toast.makeText(this@MainActivity, "Telefono marcado como vendido con exito", Toast.LENGTH_LONG).show()
-                                limpiar()
-                                textView8.text = "Sin cargar"
-                                textView5.text = "Sin cargar"
-                            }
-                        })
-
-                    }else if(ServerMessage!="Ok"){
-                        runOnUiThread(object:Runnable{
-                            public override fun run() {
-                                Toast.makeText(this@MainActivity, "Error", Toast.LENGTH_LONG).show()
-
-                            }
-                        })
-
-                    }
-                }catch (e: Exception) {
-                    runOnUiThread(object:Runnable{
-                        public override fun run() {
-                            Toast.makeText(this@MainActivity, "No hay conexion", Toast.LENGTH_LONG).show()
-                        }
-                    })
-                }
-            }).start()
-        }
-
-        // Display a negative button on alert dialog
-        builder.setNegativeButton("No"){dialog,which ->
-            Toast.makeText(applicationContext,"No se ha marcado como vendido el telefono.",Toast.LENGTH_SHORT).show()
-        }
-
-        // Finally, make the alert dialog using builder
-        val dialog: AlertDialog = builder.create()
-
-        // Display the alert dialog on app interface
-        dialog.show()
-
     }
 }

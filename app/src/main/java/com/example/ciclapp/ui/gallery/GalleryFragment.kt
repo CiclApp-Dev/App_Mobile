@@ -91,16 +91,16 @@ class GalleryFragment : Fragment() {
             if(root.spinner.selectedItem.toString() == "Seleccione" || root.textView47.text.toString() == "Seleccione un modelo"){
                 (activity as MainActivity?)?.mostrar_toast("No se ha seleccionado ninguna marca o modelo")
             }else{
-                val msg = "," + root.spinner.selectedItem.toString() + "," + root.textView47.text.toString()
+                val msg = "3," + root.spinner.selectedItem.toString() + "," + root.textView47.text.toString()
 
-                (activity as MainActivity?)?.enviar_mensaje(msg)
+                val devolucion = (activity as MainActivity?)?.enviar_mensaje(msg)
 
-                if(retornos_hilo == ""){
+                if(devolucion == ""){
                     (activity as MainActivity?)?.mostrar_toast("No hay matches disponibles o el telefono no ha sido ponderado")
-                }else if(retornos_hilo == "nada nadita"){
+                }else if(devolucion == "Error"){
                     //Pos aca no se hace nada xd
                 }else{
-                    val lista_telefonos = retornos_hilo.split("&")
+                    val lista_telefonos = devolucion!!.split("&")
                     ejemplo_lista_match.clear()
                     for(a in lista_telefonos) {
                         val telefono_actual = a.split(",")

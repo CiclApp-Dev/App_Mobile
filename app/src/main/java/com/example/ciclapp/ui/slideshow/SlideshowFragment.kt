@@ -110,12 +110,12 @@ class SlideshowFragment : Fragment() {
             if(root.spinner_inventario.selectedItem.toString() == "Seleccione" || root.textView3_inventario.text.toString() == "Seleccione un modelo"){
                 (activity as MainActivity?)?.mostrar_toast("No se ha seleccionado ninguna marca o modelo")
             }else{
-                (activity as MainActivity?)?.enviar_mensaje(root.spinner_inventario.selectedItem.toString() + "," + root.textView3_inventario.text.toString() + ",,,,")
-                if(retornos_hilo == "nada nadita"){
+                val devolucion = (activity as MainActivity?)?.enviar_mensaje("6," + root.spinner_inventario.selectedItem.toString() + "," + root.textView3_inventario.text.toString())
+                if(devolucion == "Error"){
 
                 }else{
                     ejemplo_lista.clear()
-                    val lista_telefonos = retornos_hilo.split("&")
+                    val lista_telefonos = devolucion!!.split("&")
 
                     for(a in lista_telefonos){
                         val repuesto = a.split(",")
@@ -177,11 +177,14 @@ class SlideshowFragment : Fragment() {
                 for(a in ejemplo_lista){
                     msg += marca + "@/@" + modelo + "@/@" + a.getRepuesto() + "@/@" + a.getCantidad() + "@/@" + a.getColor() + "*/*"
                 }
-                msg = msg.substring(0,msg.length - 3) + ",,,,,,"
+                msg = "7," + msg.substring(0,msg.length - 3)
                 Log.d("Tagcito", msg )
-                (activity as MainActivity?)?.enviar_mensaje(msg)
-                (activity as MainActivity?)?.mostrar_toast("Base de datos actualizada")
-                ejemplo_lista.clear()
+                val respuesta = (activity as MainActivity?)?.enviar_mensaje(msg)
+                if (respuesta != "Error"){
+                    (activity as MainActivity?)?.mostrar_toast("Base de datos actualizada")
+                    ejemplo_lista.clear()
+
+                }
                 mAdapter.notifyDataSetChanged()
             }
 

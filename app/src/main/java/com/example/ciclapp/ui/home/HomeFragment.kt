@@ -72,7 +72,7 @@ class HomeFragment : Fragment() {
                     if (root.editText2.text.toString() == "" || root.editText6.text.toString() == ""  || root.marcaSeleccionada.text.toString() == "Seleccione" || root.modeloSeleccionado.text.toString() == "Seleccione"){
                         (activity as MainActivity?)?.mostrar_mensaje_error()
                     }else{
-                        (activity as MainActivity?)?.enviar()
+                        (activity as MainActivity?)?.enviar(0)
                     }
                 }
             }else {
@@ -82,18 +82,18 @@ class HomeFragment : Fragment() {
 
          root.Boton_vender.setOnClickListener{
             if(root.textView8.text.toString() != "Sin cargar"){
-                (activity as MainActivity?)?.vender(root.textView8.text.toString())
+                (activity as MainActivity?)?.enviar(1)
             }else{
                 Toast.makeText(activity, "No se ha escaneado ningun IMEI.", Toast.LENGTH_LONG).show()
             }
         }
 
         root.CrazyButton.setOnClickListener {
-            (activity as MainActivity?)?.checkear()
+            (activity as MainActivity?)?.limpiar(1)
         }
 
         root.CrazyButtonNO.setOnClickListener {
-            (activity as MainActivity?)?.descheckear()
+            (activity as MainActivity?)?.limpiar(2)
         }
 
         root.Boton_versiones.setOnClickListener{
@@ -101,34 +101,26 @@ class HomeFragment : Fragment() {
 
 
                 val id_enviar = root.textView8.text.toString()
-                (activity as MainActivity?)?.enviar_mensaje(",$id_enviar")
+                val devolucion = (activity as MainActivity?)?.enviar_mensaje("2,$id_enviar")
+                cantidad = 0
+                versiones = mutableListOf()
 
-                if(roto != "1"){
-                    cantidad = 0
-                    versiones = mutableListOf()
-
-                    for (item in retornos_hilo.split("&")) {
-                        cantidad = cantidad + 1
-                        versiones.add(item.split(","))
-                    }
-
-                    val myIntent = Intent(activity, Versiones::class.java)
-                    startActivity(myIntent)
-                }else{
-                    Toast.makeText(activity, "No hay conexion", Toast.LENGTH_LONG).show()
-                    roto = "0"
+                for (item in devolucion!!.split("&")) {
+                    cantidad = cantidad + 1
+                    versiones.add(item.split(","))
                 }
 
+                if(devolucion != "Error"){
+                    val myIntent = Intent(activity, Versiones::class.java)
+                    startActivity(myIntent)
+                }
 
             }else if(root.textView5.text == "Sin cargar"){
                 Toast.makeText(activity, "No se ha escaneado ningun telefono", Toast.LENGTH_LONG).show()
             }else if(root.textView5.text == "Sin asignar"){
                 Toast.makeText(activity, "Aun no hay versiones del telefono seleccionado", Toast.LENGTH_LONG).show()
             }
-
-
         }
-
         root.borrar_telefono_boton.setOnClickListener {
             (activity as MainActivity?)?.eliminar_telefono(root.textView8.text.toString())
         }
